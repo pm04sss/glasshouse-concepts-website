@@ -35,10 +35,8 @@ body.loaded {
 .orb-1 {
   width: 70vw;
   height: 70vw;
-  background: radial-gradient(circle at center,
-    rgba(59, 130, 246, 0.55),
-    rgba(139, 92, 246, 0.35),
-    transparent 70%);
+  background: radial-gradient(circle, #38bdf8, #1d4ed8);
+  opacity: 0.35;
   top: -10%;
   left: -10%;
   animation: floatOrb1 20s infinite alternate ease-in-out;
@@ -47,10 +45,8 @@ body.loaded {
 .orb-2 {
   width: 65vw;
   height: 65vw;
-  background: radial-gradient(circle at center,
-    rgba(236, 72, 153, 0.45),
-    rgba(52, 211, 153, 0.3),
-    transparent 70%);
+  background: radial-gradient(circle, #10b981, #059669);
+  opacity: 0.35;
   bottom: -20%;
   right: -10%;
   animation: floatOrb2 25s infinite alternate ease-in-out;
@@ -59,10 +55,8 @@ body.loaded {
 .orb-3 {
   width: 55vw;
   height: 55vw;
-  background: radial-gradient(circle at center,
-    rgba(20, 184, 166, 0.45),
-    rgba(59, 130, 246, 0.3),
-    transparent 70%);
+  background: radial-gradient(circle, #818cf8, #4f46e5);
+  opacity: 0.35;
   top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
