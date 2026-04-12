@@ -36,47 +36,47 @@ body.loaded {
 .orb-1 {
   width: 35vw;
   background: radial-gradient(circle, #38bdf8, #1d4ed8);
-  opacity: 0.3;
+  opacity: 0.25;
   top: -10%;
   left: -10%;
-  animation: floatOrb1 8s infinite alternate ease-in-out;
+  animation: floatOrb1 3s infinite alternate ease-in-out;
 }
 
 .orb-2 {
   width: 32vw;
   background: radial-gradient(circle, #10b981, #059669);
-  opacity: 0.3;
+  opacity: 0.25;
   bottom: -20%;
   right: -10%;
-  animation: floatOrb2 10s infinite alternate ease-in-out;
+  animation: floatOrb2 4s infinite alternate ease-in-out;
 }
 
 .orb-3 {
   width: 27vw;
   background: radial-gradient(circle, #818cf8, #4f46e5);
-  opacity: 0.3;
+  opacity: 0.25;
   top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
-  animation: floatOrb3 6s infinite alternate ease-in-out;
+  animation: floatOrb3 4.5s infinite alternate ease-in-out;
 }
 
 .orb-4 {
   width: 22vw;
   background: radial-gradient(circle, #38bdf8, #0ea5e9);
-  opacity: 0.3;
+  opacity: 0.25;
   top: 10%;
   right: 10%;
-  animation: floatOrb4 7s infinite alternate ease-in-out;
+  animation: floatOrb4 5s infinite alternate ease-in-out;
 }
 
 .orb-5 {
   width: 25vw;
   background: radial-gradient(circle, #818cf8, #4f46e5);
-  opacity: 0.3;
+  opacity: 0.25;
   bottom: 30%;
   left: 20%;
-  animation: floatOrb1 9s infinite alternate ease-in-out;
+  animation: floatOrb1 6s infinite alternate ease-in-out;
   animation-delay: -4s;
 }
 
@@ -114,7 +114,7 @@ body.loaded {
   height: 80vw;
   border-radius: 50%;
   filter: blur(100px);
-  opacity: 0.3;
+  opacity: 0.25;
   animation: drift 20s infinite alternate ease-in-out;
 }
 
