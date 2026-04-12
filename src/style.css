@@ -154,20 +154,14 @@ body.loaded {
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Logo pill — pulsing glow with hover intensify */
+/* Logo pill — constant solid glow */
 .logo-glow {
-  box-shadow: 0 0 15px rgba(56, 189, 248, 0.5);
-  animation: pulseGlow 3s ease-in-out infinite;
+  box-shadow: 0 0 20px 2px rgba(56, 189, 248, 0.6);
   transition: box-shadow 0.3s ease;
 }
 
 .logo-glow:hover {
-  box-shadow: 0 0 28px rgba(56, 189, 248, 0.9), 0 0 55px rgba(52, 211, 153, 0.35);
-}
-
-@keyframes pulseGlow {
-  0%, 100% { box-shadow: 0 0 15px rgba(56, 189, 248, 0.5); }
-  50%       { box-shadow: 0 0 24px rgba(56, 189, 248, 0.75), 0 0 40px rgba(52, 211, 153, 0.2); }
+  box-shadow: 0 0 30px 4px rgba(56, 189, 248, 0.9), 0 0 55px rgba(52, 211, 153, 0.35);
 }
 
 .glow-text {
