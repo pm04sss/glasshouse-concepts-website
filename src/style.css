@@ -1,0 +1,90 @@
+@import "tailwindcss";
+
+body {
+  margin: 0;
+  background-color: #020617;
+  color: #f8fafc;
+  font-family: ui-sans-serif, system-ui, -apple-system, sans-serif;
+  overflow-x: hidden;
+}
+
+.aurora-container {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.aurora-blob {
+  position: absolute;
+  width: 80vw;
+  height: 80vw;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0.3;
+  animation: drift 20s infinite alternate ease-in-out;
+}
+
+.blob-1 {
+  top: -20%;
+  left: -10%;
+  background: rgba(56, 189, 248, 0.4);
+  animation-duration: 25s;
+}
+
+.blob-2 {
+  bottom: -20%;
+  right: -10%;
+  background: rgba(52, 211, 153, 0.3);
+  animation-delay: -5s;
+}
+
+.blob-3 {
+  top: 20%;
+  left: 20%;
+  background: rgba(129, 140, 248, 0.3);
+  animation-delay: -10s;
+}
+
+@keyframes drift {
+  0%   { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(10%, 15%) scale(1.1); }
+}
+
+.glass-panel {
+  background: rgba(2, 6, 23, 0.6);
+  backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.glow-text {
+  background: linear-gradient(90deg, #38bdf8, #818cf8, #34d399);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.breathing-dot {
+  width: 10px;
+  height: 10px;
+  background-color: #10b981;
+  border-radius: 50%;
+  position: relative;
+}
+
+.breathing-dot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background-color: #34d399;
+  animation: ping 2s infinite;
+}
+
+@keyframes ping {
+  75%, 100% {
+    transform: scale(3);
+    opacity: 0;
+  }
+}
