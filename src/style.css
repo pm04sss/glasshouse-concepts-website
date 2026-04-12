@@ -36,7 +36,7 @@ body.loaded {
   width: 70vw;
   height: 70vw;
   background: radial-gradient(circle, #38bdf8, #1d4ed8);
-  opacity: 0.35;
+  opacity: 0.3;
   top: -10%;
   left: -10%;
   animation: floatOrb1 15s infinite alternate ease-in-out;
@@ -46,7 +46,7 @@ body.loaded {
   width: 65vw;
   height: 65vw;
   background: radial-gradient(circle, #10b981, #059669);
-  opacity: 0.35;
+  opacity: 0.3;
   bottom: -20%;
   right: -10%;
   animation: floatOrb2 18s infinite alternate ease-in-out;
@@ -56,7 +56,7 @@ body.loaded {
   width: 55vw;
   height: 55vw;
   background: radial-gradient(circle, #818cf8, #4f46e5);
-  opacity: 0.35;
+  opacity: 0.3;
   top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -67,7 +67,7 @@ body.loaded {
   width: 45vw;
   height: 45vw;
   background: radial-gradient(circle, #38bdf8, #0ea5e9);
-  opacity: 0.35;
+  opacity: 0.3;
   top: 10%;
   right: 10%;
   animation: floatOrb4 14s infinite alternate ease-in-out;
@@ -77,7 +77,7 @@ body.loaded {
   width: 50vw;
   height: 50vw;
   background: radial-gradient(circle, #818cf8, #4f46e5);
-  opacity: 0.35;
+  opacity: 0.3;
   bottom: 30%;
   left: 20%;
   animation: floatOrb1 16s infinite alternate ease-in-out;
