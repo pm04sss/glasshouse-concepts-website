@@ -40,7 +40,7 @@ body.loaded {
   opacity: 0.25;
   top: -10%;
   left: -10%;
-  animation: floatOrb1 3s infinite alternate ease-in-out;
+  animation: floatOrb1 1.5s infinite alternate ease-in-out;
 }
 
 .orb-2 {
@@ -49,7 +49,7 @@ body.loaded {
   opacity: 0.25;
   bottom: -20%;
   right: -10%;
-  animation: floatOrb2 4s infinite alternate ease-in-out;
+  animation: floatOrb2 2s infinite alternate ease-in-out;
 }
 
 .orb-3 {
@@ -59,7 +59,7 @@ body.loaded {
   top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
-  animation: floatOrb3 4.5s infinite alternate ease-in-out;
+  animation: floatOrb3 2.2s infinite alternate ease-in-out;
 }
 
 .orb-4 {
@@ -68,7 +68,7 @@ body.loaded {
   opacity: 0.25;
   top: 10%;
   right: 10%;
-  animation: floatOrb4 5s infinite alternate ease-in-out;
+  animation: floatOrb4 2.5s infinite alternate ease-in-out;
 }
 
 .orb-5 {
@@ -77,7 +77,7 @@ body.loaded {
   opacity: 0.25;
   bottom: 30%;
   left: 20%;
-  animation: floatOrb1 6s infinite alternate ease-in-out;
+  animation: floatOrb1 3s infinite alternate ease-in-out;
   animation-delay: -4s;
 }
 
