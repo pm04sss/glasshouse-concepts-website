@@ -39,7 +39,7 @@ body.loaded {
   opacity: 0.35;
   top: -10%;
   left: -10%;
-  animation: floatOrb1 20s infinite alternate ease-in-out;
+  animation: floatOrb1 15s infinite alternate ease-in-out;
 }
 
 .orb-2 {
@@ -49,7 +49,7 @@ body.loaded {
   opacity: 0.35;
   bottom: -20%;
   right: -10%;
-  animation: floatOrb2 25s infinite alternate ease-in-out;
+  animation: floatOrb2 18s infinite alternate ease-in-out;
 }
 
 .orb-3 {
@@ -60,7 +60,28 @@ body.loaded {
   top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
-  animation: floatOrb3 22s infinite alternate ease-in-out;
+  animation: floatOrb3 12s infinite alternate ease-in-out;
+}
+
+.orb-4 {
+  width: 45vw;
+  height: 45vw;
+  background: radial-gradient(circle, #38bdf8, #0ea5e9);
+  opacity: 0.35;
+  top: 10%;
+  right: 10%;
+  animation: floatOrb4 14s infinite alternate ease-in-out;
+}
+
+.orb-5 {
+  width: 50vw;
+  height: 50vw;
+  background: radial-gradient(circle, #818cf8, #4f46e5);
+  opacity: 0.35;
+  bottom: 30%;
+  left: 20%;
+  animation: floatOrb1 16s infinite alternate ease-in-out;
+  animation-delay: -8s;
 }
 
 @keyframes floatOrb1 {
@@ -76,6 +97,11 @@ body.loaded {
 @keyframes floatOrb3 {
   0%   { transform: translate(-50%, -50%) scale(1);   }
   100% { transform: translate(-20%, -80%) scale(1.2); }
+}
+
+@keyframes floatOrb4 {
+  0%   { transform: translate(0,    0   ) rotate(0deg);   }
+  100% { transform: translate(-40%, 40%) rotate(90deg);   }
 }
 
 .aurora-container {
