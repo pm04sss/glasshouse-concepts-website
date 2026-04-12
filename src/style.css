@@ -24,7 +24,7 @@ body.loaded {
   z-index: -1;
   overflow: hidden;
   pointer-events: none;
-  filter: blur(60px);
+  filter: blur(80px);
 }
 
 .orb {
