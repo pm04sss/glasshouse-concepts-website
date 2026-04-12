@@ -95,6 +95,14 @@ body.loaded {
   }
 }
 
+/* Technical grid section — open feel, no glass container */
+.grid-section {
+  background-image:
+    linear-gradient(rgba(56, 189, 248, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(56, 189, 248, 0.05) 1px, transparent 1px);
+  background-size: 50px 50px;
+}
+
 /* Deep frosted glass section */
 .deep-glass {
   background: rgba(2, 6, 23, 0.55);
