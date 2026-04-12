@@ -128,6 +128,22 @@ body.loaded {
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+/* Logo pill — pulsing glow with hover intensify */
+.logo-glow {
+  box-shadow: 0 0 15px rgba(56, 189, 248, 0.5);
+  animation: pulseGlow 3s ease-in-out infinite;
+  transition: box-shadow 0.3s ease;
+}
+
+.logo-glow:hover {
+  box-shadow: 0 0 28px rgba(56, 189, 248, 0.9), 0 0 55px rgba(52, 211, 153, 0.35);
+}
+
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 15px rgba(56, 189, 248, 0.5); }
+  50%       { box-shadow: 0 0 24px rgba(56, 189, 248, 0.75), 0 0 40px rgba(52, 211, 153, 0.2); }
+}
+
 .glow-text {
   background: linear-gradient(90deg, #38bdf8, #818cf8, #34d399);
   -webkit-background-clip: text;
