@@ -6,6 +6,10 @@
     <title>GLASSHOUSE // Infrastructure &amp; Engineering</title>
     <script type="module" src="/src/main.js"></script>
     <style>
+        /* Hide body until loaded class is added — must be inline so it
+           applies before any external CSS or JS module has resolved */
+        body { opacity: 0; }
+
         #loader {
             position: fixed;
             inset: 0;
