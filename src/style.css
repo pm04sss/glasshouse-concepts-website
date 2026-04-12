@@ -41,7 +41,7 @@ body.loaded {
     transparent 70%);
   top: -10%;
   left: -10%;
-  animation: floatOrb1 20s ease-in-out infinite;
+  animation: floatOrb1 20s infinite alternate ease-in-out;
 }
 
 .orb-2 {
@@ -53,7 +53,7 @@ body.loaded {
     transparent 70%);
   bottom: -20%;
   right: -10%;
-  animation: floatOrb2 25s ease-in-out infinite;
+  animation: floatOrb2 25s infinite alternate ease-in-out;
 }
 
 .orb-3 {
@@ -66,31 +66,22 @@ body.loaded {
   top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
-  animation: floatOrb3 22s ease-in-out infinite;
+  animation: floatOrb3 22s infinite alternate ease-in-out;
 }
 
 @keyframes floatOrb1 {
-  0%   { transform: translate(0,    0   ) scale(1);    }
-  25%  { transform: translate(12%,  8%  ) scale(1.08); }
-  50%  { transform: translate(5%,   18% ) scale(1.04); }
-  75%  { transform: translate(-6%,  10% ) scale(0.96); }
-  100% { transform: translate(0,    0   ) scale(1);    }
+  0%   { transform: translate(0,    0   ) scale(1);   }
+  100% { transform: translate(20%,  30% ) scale(1.1); }
 }
 
 @keyframes floatOrb2 {
-  0%   { transform: translate(0,    0   ) scale(1);    }
-  25%  { transform: translate(-10%, -6% ) scale(1.06); }
-  50%  { transform: translate(-5%,  -14%) scale(1.1);  }
-  75%  { transform: translate(8%,   -8% ) scale(1.03); }
-  100% { transform: translate(0,    0   ) scale(1);    }
+  0%   { transform: translate(0,    0   ) scale(1);   }
+  100% { transform: translate(-30%, -20%) scale(0.9); }
 }
 
 @keyframes floatOrb3 {
-  0%   { transform: translate(-50%, -50%) scale(1);    }
-  25%  { transform: translate(-62%, -44%) scale(1.07); }
-  50%  { transform: translate(-55%, -60%) scale(0.95); }
-  75%  { transform: translate(-42%, -52%) scale(1.05); }
-  100% { transform: translate(-50%, -50%) scale(1);    }
+  0%   { transform: translate(-50%, -50%) scale(1);   }
+  100% { transform: translate(-20%, -80%) scale(1.2); }
 }
 
 .aurora-container {
