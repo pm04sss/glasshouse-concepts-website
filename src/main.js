@@ -111,3 +111,48 @@ roleButtons.forEach((btn) => {
 })
 
 renderAccessMatrix()
+
+const LOG_LINES = [
+  '> INITIALIZING_SECURE_TUNNEL...',
+  '> VERIFYING_INTEGRITY_PROTOCOLS...',
+  '> SYSTEM_STATUS: OPERATIONAL',
+]
+const TYPE_MS = 45
+const HOLD_MS = 1800
+const ERASE_MS = 25
+
+const logTextEl = document.getElementById('system-log-text')
+
+if (logTextEl) {
+  let lineIndex = 0
+  let charIndex = 0
+  let phase = 'typing'
+
+  function stepLog() {
+    const line = LOG_LINES[lineIndex]
+    if (phase === 'typing') {
+      charIndex += 1
+      logTextEl.textContent = line.slice(0, charIndex)
+      if (charIndex >= line.length) {
+        phase = 'holding'
+        setTimeout(stepLog, HOLD_MS)
+        return
+      }
+      setTimeout(stepLog, TYPE_MS)
+    } else if (phase === 'holding') {
+      phase = 'erasing'
+      setTimeout(stepLog, ERASE_MS)
+    } else if (phase === 'erasing') {
+      charIndex -= 1
+      logTextEl.textContent = line.slice(0, Math.max(0, charIndex))
+      if (charIndex <= 0) {
+        lineIndex = (lineIndex + 1) % LOG_LINES.length
+        charIndex = 0
+        phase = 'typing'
+      }
+      setTimeout(stepLog, ERASE_MS)
+    }
+  }
+
+  stepLog()
+}

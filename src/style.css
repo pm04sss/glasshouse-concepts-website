@@ -259,6 +259,31 @@ body.loaded {
   color: rgb(56, 189, 248);
 }
 
+#system-log {
+  background: rgba(0, 0, 0, 0.55);
+  border: 1px solid rgba(74, 222, 128, 0.2);
+  border-radius: 6px;
+  padding: 6px 10px;
+  color: rgb(74, 222, 128);
+  letter-spacing: 0.05em;
+  max-width: 320px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.system-log-caret {
+  display: inline-block;
+  margin-left: 2px;
+  animation: logCaretBlink 1s steps(1) infinite;
+  color: rgb(74, 222, 128);
+}
+
+@keyframes logCaretBlink {
+  0%, 50%   { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
 /* Logo pill — constant solid glow */
 .logo-glow {
   box-shadow: 0 0 20px 2px rgba(56, 189, 248, 0.6);
