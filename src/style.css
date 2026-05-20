@@ -161,6 +161,39 @@ body.loaded {
   box-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
 }
 
+.vitals-card {
+  background: #020617;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.vitals-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    transparent 38%,
+    rgba(56, 189, 248, 0.12) 46%,
+    rgba(56, 189, 248, 0.55) 50%,
+    rgba(56, 189, 248, 0.12) 54%,
+    transparent 62%,
+    transparent 100%
+  );
+  background-size: 220% 100%;
+  animation: ekgPulse 3.2s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.7;
+}
+
+@keyframes ekgPulse {
+  0%   { background-position: 220% 0; }
+  100% { background-position: -120% 0; }
+}
+
 nav.glass-panel {
   background: #ffffff;
   backdrop-filter: none;

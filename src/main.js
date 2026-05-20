@@ -7,6 +7,7 @@ const MAX_MS = 45
 const TICK_INTERVAL_MS = 1500
 
 const latencyEl = document.getElementById('vitals-latency')
+const latencyLargeEl = document.getElementById('vitals-latency-large')
 
 function tickTelemetry() {
   const latency = Math.floor(Math.random() * (MAX_MS - MIN_MS + 1)) + MIN_MS
@@ -14,8 +15,12 @@ function tickTelemetry() {
   if (latencyHistory.length > HISTORY_MAX) {
     latencyHistory.shift()
   }
+  const formatted = `${latency}ms`
   if (latencyEl) {
-    latencyEl.textContent = `${latency}ms`
+    latencyEl.textContent = formatted
+  }
+  if (latencyLargeEl) {
+    latencyLargeEl.textContent = formatted
   }
 }
 
