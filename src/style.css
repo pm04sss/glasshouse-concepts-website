@@ -212,6 +212,53 @@ body.loaded {
   box-shadow: 0 0 15px rgba(56, 189, 248, 0.3);
 }
 
+.access-grid-bg {
+  background-color: rgba(2, 6, 23, 0.5);
+  background-image:
+    linear-gradient(rgba(56, 189, 248, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(56, 189, 248, 0.08) 1px, transparent 1px);
+  background-size: 50px 50px;
+  border: 1px solid rgba(56, 189, 248, 0.15);
+}
+
+.module-cell {
+  background: rgba(2, 6, 23, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.75rem;
+  padding: 1rem 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  transition: all 0.3s ease-in-out;
+  opacity: 0.2;
+}
+
+.module-cell.unlocked {
+  opacity: 1;
+  border-color: #38bdf8;
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.25);
+}
+
+.module-cell .module-label {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: rgb(226, 232, 240);
+  letter-spacing: -0.01em;
+}
+
+.module-cell .module-status {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.625rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgb(100, 116, 139);
+}
+
+.module-cell.unlocked .module-status {
+  color: rgb(56, 189, 248);
+}
+
 nav.glass-panel {
   background: #ffffff;
   backdrop-filter: none;
