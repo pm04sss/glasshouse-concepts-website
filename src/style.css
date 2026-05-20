@@ -259,14 +259,6 @@ body.loaded {
   color: rgb(56, 189, 248);
 }
 
-nav.glass-panel {
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: none;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
 /* Logo pill — constant solid glow */
 .logo-glow {
   box-shadow: 0 0 20px 2px rgba(56, 189, 248, 0.6);
