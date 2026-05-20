@@ -194,6 +194,24 @@ body.loaded {
   100% { background-position: -120% 0; }
 }
 
+.role-btn {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgb(148, 163, 184);
+}
+
+.role-btn:hover {
+  border-color: rgba(56, 189, 248, 0.5);
+  color: rgb(186, 230, 253);
+}
+
+.role-btn.active {
+  background: rgba(56, 189, 248, 0.15);
+  border-color: rgba(56, 189, 248, 1);
+  color: rgb(56, 189, 248);
+  box-shadow: 0 0 15px rgba(56, 189, 248, 0.3);
+}
+
 nav.glass-panel {
   background: #ffffff;
   backdrop-filter: none;
