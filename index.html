@@ -100,6 +100,7 @@
         </div>
         <div class="hidden md:flex items-center gap-6 text-xs font-mono text-[#0f172a]">
             <span class="flex items-center gap-2"><div class="breathing-dot"></div> SYS.OPERATIONAL</span>
+            <span class="flex items-center gap-2"><span class="opacity-60">LATENCY</span> <span id="vitals-latency" class="tabular-nums">--ms</span></span>
         </div>
     </nav>
 
@@ -136,17 +137,17 @@
         <div class="mt-32">
             <h2 class="text-center text-slate-500 font-mono text-xs tracking-[0.4em] uppercase mb-12">Core Capabilities</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="glass-panel p-8 rounded-3xl hover:border-sky-500/50 transition-all group">
+                <div class="glass-panel capability-card p-8 rounded-3xl group">
                     <div class="text-sky-400 text-xs font-mono mb-4">01</div>
                     <h3 class="text-xl font-bold mb-3">Precision Architecture</h3>
                     <p class="text-slate-400 text-sm">Deterministic routing for complex datasets ensuring zero dropped events in critical paths.</p>
                 </div>
-                <div class="glass-panel p-8 rounded-3xl hover:border-emerald-500/50 transition-all group">
+                <div class="glass-panel capability-card p-8 rounded-3xl group">
                     <div class="text-emerald-400 text-xs font-mono mb-4">02</div>
                     <h3 class="text-xl font-bold mb-3">High-Fidelity Media</h3>
                     <p class="text-slate-400 text-sm">Optimized streaming for high-res protocol videos and real-time interactive telemetry.</p>
                 </div>
-                <div class="glass-panel p-8 rounded-3xl hover:border-indigo-500/50 transition-all group">
+                <div class="glass-panel capability-card p-8 rounded-3xl group">
                     <div class="text-indigo-400 text-xs font-mono mb-4">03</div>
                     <h3 class="text-xl font-bold mb-3">Secure Cryptography</h3>
                     <p class="text-slate-400 text-sm">Quantum-resistant primitives for end-to-end encryption of sensitive proprietary data.</p>

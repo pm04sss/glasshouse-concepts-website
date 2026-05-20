@@ -151,6 +151,16 @@ body.loaded {
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+.capability-card {
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  transition: all 0.3s ease-in-out;
+}
+
+.capability-card:hover {
+  border-color: rgba(56, 189, 248, 1);
+  box-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
+}
+
 nav.glass-panel {
   background: #ffffff;
   backdrop-filter: none;
