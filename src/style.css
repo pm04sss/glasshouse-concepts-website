@@ -1,10 +1,12 @@
 @import "tailwindcss";
 
+@theme {
+  --color-ghc-navy: #020617;
+}
+
 body {
-  margin: 0;
-  background-color: #020617;
+  background-color: var(--color-ghc-navy);
   color: #f8fafc;
-  font-family: ui-sans-serif, system-ui, -apple-system, sans-serif;
   overflow-x: hidden;
   opacity: 0;
 }
@@ -165,7 +167,7 @@ body.loaded {
 }
 
 .vitals-card {
-  background: #020617;
+  background: var(--color-ghc-navy);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -218,8 +220,8 @@ body.loaded {
 .access-grid-bg {
   background-color: rgba(2, 6, 23, 0.5);
   background-image:
-    linear-gradient(rgba(56, 189, 248, 0.08) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(56, 189, 248, 0.08) 1px, transparent 1px);
+    linear-gradient(rgba(56, 189, 248, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(56, 189, 248, 0.05) 1px, transparent 1px);
   background-size: 50px 50px;
   border: 1px solid rgba(56, 189, 248, 0.15);
 }
