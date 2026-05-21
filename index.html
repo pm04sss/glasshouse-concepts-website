@@ -124,14 +124,43 @@
             <p class="text-slate-300 text-lg md:text-xl max-w-2xl font-light leading-relaxed mx-auto relative z-10">Our core engine operates behind a zero-trust perimeter, ensuring mission-critical data remains immutable and accessible.</p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mt-10">
-            <div class="p-8 border-l border-sky-500/30">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mt-10">
+            <!-- Unit 1 (Wide): Philosophy -->
+            <div class="bento-cell md:col-span-2 p-8 rounded-2xl flex flex-col">
+                <span class="text-sky-400 font-mono text-[10px] tracking-[0.3em] uppercase mb-3 block">// UNIT_01 · DOCTRINE</span>
                 <h2 class="text-2xl font-bold mb-4 uppercase tracking-tight text-sky-400">Our Philosophy</h2>
                 <p class="text-slate-400 leading-relaxed">Software failure in high-stakes environments is a critical risk. We build deterministic systems designed for absolute resilience and high-throughput observability.</p>
             </div>
-            <div class="p-8 border-l border-emerald-500/30">
+
+            <!-- Unit 2 (Slim): Visual — Security Shield -->
+            <div class="bento-cell md:col-span-1 p-6 rounded-2xl flex flex-col items-center justify-center relative overflow-hidden">
+                <span class="text-emerald-400 font-mono text-[10px] tracking-[0.3em] uppercase mb-3 self-start absolute top-6 left-6">// UNIT_02 · TRUST</span>
+                <div class="shield-visual relative flex items-center justify-center w-full" aria-hidden="true">
+                    <svg class="shield-svg" viewBox="0 0 100 110" xmlns="http://www.w3.org/2000/svg" fill="none">
+                        <defs>
+                            <linearGradient id="shieldGrad" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0%" stop-color="#10b981" stop-opacity="0.4"/>
+                                <stop offset="100%" stop-color="#10b981" stop-opacity="0"/>
+                            </linearGradient>
+                        </defs>
+                        <path d="M50 5 L90 20 V55 C90 80 72 100 50 108 C28 100 10 80 10 55 V20 Z"
+                              fill="url(#shieldGrad)" stroke="#10b981" stroke-width="1.5"/>
+                        <path d="M50 18 L78 28 V55 C78 73 65 88 50 95 C35 88 22 73 22 55 V28 Z"
+                              fill="none" stroke="rgba(16, 185, 129, 0.4)" stroke-width="1" stroke-dasharray="2 3"/>
+                        <path d="M37 56 L46 66 L65 44" fill="none" stroke="#34d399" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <span class="shield-pulse"></span>
+                </div>
+                <div class="mt-4 font-mono text-[10px] tracking-widest uppercase text-slate-500 text-center">
+                    Zero-Trust · <span class="text-emerald-400">ACTIVE</span>
+                </div>
+            </div>
+
+            <!-- Unit 3 (Slim): Methodology -->
+            <div class="bento-cell md:col-span-1 p-8 rounded-2xl flex flex-col">
+                <span class="text-indigo-400 font-mono text-[10px] tracking-[0.3em] uppercase mb-3 block">// UNIT_03 · METHOD</span>
                 <h2 class="text-2xl font-bold mb-4 uppercase tracking-tight text-emerald-400">Our Methodology</h2>
-                <p class="text-slate-400 leading-relaxed">Zero-trust architecture combined with formal verification. We ensure biometric data is encrypted and delivered with sub-50ms latency globally.</p>
+                <p class="text-slate-400 leading-relaxed text-sm">Zero-trust architecture combined with formal verification. We ensure biometric data is encrypted and delivered with sub-50ms latency globally.</p>
             </div>
         </div>
 
