@@ -94,7 +94,9 @@
     </div>
 
     <nav class="fixed top-0 w-full z-50 bg-ghc-navy/40 backdrop-blur-xl border-b border-white/10 px-8 py-4 flex justify-between items-center">
-        <div class="flex items-center gap-3"><!-- Branding slot — intentionally empty (sprint 248), reserved for new asset --></div>
+        <a href="/" class="flex items-center gap-3" aria-label="Glasshouse Concepts — home">
+            <img src="/logo.png" alt="Glasshouse Concepts" class="h-10 w-auto object-contain transition-opacity hover:opacity-80" />
+        </a>
         <div class="hidden md:flex items-center gap-6 text-xs font-mono text-[#f8fafc]">
             <span class="flex items-center gap-2"><div class="breathing-dot"></div> <span class="border border-emerald-500/30 px-2 py-0.5 rounded-sm tracking-widest uppercase text-[10px] text-emerald-400 shadow-[0_0_10px_rgba(52,211,153,0.2)]">SYS.OPERATIONAL</span></span>
             <span class="flex items-center gap-2"><span class="opacity-60">LATENCY</span> <span id="vitals-latency" class="tabular-nums">--ms</span></span>
