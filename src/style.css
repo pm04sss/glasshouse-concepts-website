@@ -157,6 +157,7 @@ body.loaded {
 }
 
 .capability-card {
+  position: relative;
   border: 1px solid rgba(56, 189, 248, 0.3);
   transition: all 0.3s ease-in-out;
 }
@@ -164,6 +165,49 @@ body.loaded {
 .capability-card:hover {
   border-color: rgba(56, 189, 248, 1);
   box-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
+}
+
+/* Signal Trace — rotating conic spark on hover.
+   Uses @property so the conic-gradient's from-angle is animatable. */
+@property --signal-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+.capability-card::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: conic-gradient(
+    from var(--signal-angle),
+    transparent 0deg,
+    #38bdf8 30deg,
+    transparent 60deg,
+    transparent 360deg
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.capability-card:hover::before {
+  opacity: 1;
+  animation: signal-trace 2s linear infinite;
+}
+
+@keyframes signal-trace {
+  to { --signal-angle: 360deg; }
 }
 
 .vitals-card {
