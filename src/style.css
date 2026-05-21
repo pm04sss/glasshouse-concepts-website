@@ -267,12 +267,39 @@ body.loaded {
 }
 
 .access-grid-bg {
+  position: relative;
   background-color: rgba(2, 6, 23, 0.5);
   background-image:
     linear-gradient(rgba(56, 189, 248, 0.05) 1px, transparent 1px),
     linear-gradient(90deg, rgba(56, 189, 248, 0.05) 1px, transparent 1px);
   background-size: 50px 50px;
   border: 1px solid rgba(56, 189, 248, 0.15);
+  --mx: -300px;
+  --my: -300px;
+}
+
+/* Magnetic illumination — brighter grid (0.2 alpha) revealed only inside
+   a 300px radial mask centered on the cursor. Default coords are off-screen,
+   so on touch devices (where JS skips attaching) nothing is revealed and
+   the base 0.05 grid remains the only visible layer. */
+.access-grid-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  background-image:
+    linear-gradient(rgba(56, 189, 248, 0.2) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(56, 189, 248, 0.2) 1px, transparent 1px);
+  background-size: 50px 50px;
+  -webkit-mask-image: radial-gradient(circle 150px at var(--mx) var(--my), #000 0%, rgba(0,0,0,0.6) 50%, transparent 100%);
+          mask-image: radial-gradient(circle 150px at var(--mx) var(--my), #000 0%, rgba(0,0,0,0.6) 50%, transparent 100%);
+}
+
+/* Children must sit above the illumination overlay */
+.access-grid-bg > * {
+  position: relative;
+  z-index: 1;
 }
 
 .module-cell {

@@ -23,6 +23,38 @@ function hydrateContent() {
 }
 
 hydrateContent()
+setupMagneticGrid()
+
+function setupMagneticGrid() {
+  const grid = document.querySelector('.access-grid-bg')
+  if (!grid) return
+  // Touch / no-hover devices: skip listener, leave base 0.05 grid visible.
+  if (window.matchMedia && window.matchMedia('(hover: none)').matches) return
+
+  let rafId = 0
+  let pendingX = -300
+  let pendingY = -300
+
+  const flush = () => {
+    rafId = 0
+    grid.style.setProperty('--mx', pendingX + 'px')
+    grid.style.setProperty('--my', pendingY + 'px')
+  }
+
+  grid.addEventListener('pointermove', (event) => {
+    if (event.pointerType === 'touch') return
+    const rect = grid.getBoundingClientRect()
+    pendingX = event.clientX - rect.left
+    pendingY = event.clientY - rect.top
+    if (!rafId) rafId = requestAnimationFrame(flush)
+  })
+
+  grid.addEventListener('pointerleave', () => {
+    pendingX = -300
+    pendingY = -300
+    if (!rafId) rafId = requestAnimationFrame(flush)
+  })
+}
 
 function generateIntegrityHash() {
   const bytes = new Uint8Array(16)
