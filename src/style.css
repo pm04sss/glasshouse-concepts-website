@@ -225,9 +225,9 @@ body.loaded {
     90deg,
     transparent 0%,
     transparent 38%,
-    rgba(56, 189, 248, 0.12) 46%,
-    rgba(56, 189, 248, 0.55) 50%,
-    rgba(56, 189, 248, 0.12) 54%,
+    rgba(56, 189, 248, 0.08) 46%,
+    rgba(56, 189, 248, 0.4) 50%,
+    rgba(56, 189, 248, 0.08) 54%,
     transparent 62%,
     transparent 100%
   );
@@ -235,7 +235,7 @@ body.loaded {
   animation: ekgPulse 3.2s linear infinite;
   pointer-events: none;
   z-index: 0;
-  opacity: 0.7;
+  opacity: 0.4;
 }
 
 @keyframes ekgPulse {
