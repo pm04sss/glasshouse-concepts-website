@@ -15,10 +15,19 @@ function hydrateContent() {
   const numberSlots = document.querySelectorAll('[data-capability-number]')
   const titleSlots = document.querySelectorAll('[data-capability-title]')
   const bodySlots = document.querySelectorAll('[data-capability-body]')
+  const specSlots = document.querySelectorAll('[data-capability-specs]')
   SITE_CONTENT.capabilities.forEach((cap, i) => {
     if (numberSlots[i]) numberSlots[i].textContent = cap.number
     if (titleSlots[i]) titleSlots[i].textContent = cap.title
     if (bodySlots[i]) bodySlots[i].textContent = cap.body
+    if (specSlots[i] && Array.isArray(cap.specs)) {
+      specSlots[i].innerHTML = ''
+      cap.specs.forEach((line) => {
+        const li = document.createElement('li')
+        li.textContent = line
+        specSlots[i].appendChild(li)
+      })
+    }
   })
 }
 

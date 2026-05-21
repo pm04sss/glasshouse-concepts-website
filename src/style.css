@@ -163,6 +163,7 @@ body.loaded {
 
 .capability-card {
   position: relative;
+  overflow: hidden;
   border: 1px solid rgba(56, 189, 248, 0.3);
   transition: all 0.3s ease-in-out;
 }
@@ -170,6 +171,67 @@ body.loaded {
 .capability-card:hover {
   border-color: rgba(56, 189, 248, 1);
   box-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
+}
+
+/* Deep Scan — 1px horizontal sky-blue beam sweeps top→bottom on hover.
+   ::after is layered above ::before (signal-trace conic border) but below
+   content (which is statically positioned and stacks above pseudo-elements
+   by default in the parent's stacking context). */
+.capability-card::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -2px;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(56, 189, 248, 0.8) 20%,
+    #38bdf8 50%,
+    rgba(56, 189, 248, 0.8) 80%,
+    transparent 100%
+  );
+  box-shadow: 0 0 8px rgba(56, 189, 248, 0.6);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.capability-card:hover::after {
+  opacity: 1;
+  animation: deep-scan 1.8s linear infinite;
+}
+
+@keyframes deep-scan {
+  0%   { top: -2px; }
+  100% { top: 100%; }
+}
+
+/* Technical metadata — hidden by default, fades in on hover.
+   Positioned below body copy, sub-readable size to add texture
+   without competing with the headline content. */
+.capability-specs {
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px dashed rgba(56, 189, 248, 0.15);
+  font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  font-size: 0.625rem;
+  line-height: 1.6;
+  letter-spacing: 0.08em;
+  color: rgba(148, 163, 184, 0.75);
+  opacity: 0;
+  transition: opacity 500ms ease;
+  list-style: none;
+  padding-left: 0;
+}
+
+.capability-card:hover .capability-specs {
+  opacity: 0.6;
+}
+
+.capability-specs li::before {
+  content: '› ';
+  color: rgba(56, 189, 248, 0.6);
 }
 
 /* Signal Trace — rotating conic spark on hover.
