@@ -31,7 +31,8 @@ body.loaded {
   position: absolute;
   border-radius: 50%;
   aspect-ratio: 1 / 1;
-  will-change: transform;
+  will-change: transform, opacity;
+  transform: translateZ(0);
 }
 
 .orb-1 {
@@ -117,6 +118,8 @@ body.loaded {
   filter: blur(100px);
   opacity: 0.25;
   animation: drift 20s infinite alternate ease-in-out;
+  will-change: transform, opacity;
+  transform: translateZ(0);
 }
 
 .blob-1 {
