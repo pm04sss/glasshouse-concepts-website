@@ -119,7 +119,6 @@ body.loaded {
   border-radius: 50%;
   filter: blur(100px);
   opacity: 0.25;
-  animation: drift 20s infinite alternate ease-in-out;
   will-change: transform, opacity;
   transform: translateZ(0);
 }
@@ -128,13 +127,14 @@ body.loaded {
   top: -20%;
   left: -10%;
   background: rgba(56, 189, 248, 0.4);
-  animation-duration: 25s;
+  animation: drift-alpha 26s infinite alternate ease-in-out;
 }
 
 .blob-2 {
   bottom: -20%;
   right: -10%;
   background: rgba(52, 211, 153, 0.3);
+  animation: drift-beta 32s infinite alternate ease-in-out;
   animation-delay: -5s;
 }
 
@@ -142,12 +142,29 @@ body.loaded {
   top: 20%;
   left: 20%;
   background: rgba(129, 140, 248, 0.3);
+  animation: drift-gamma 22s infinite alternate ease-in-out;
   animation-delay: -10s;
 }
 
-@keyframes drift {
-  0%   { transform: translate(0, 0) scale(1); }
-  100% { transform: translate(10%, 15%) scale(1.1); }
+@keyframes drift-alpha {
+  0%   { transform: translate(0, 0) rotate(0deg); }
+  33%  { transform: translate(30%, -20%) rotate(120deg); }
+  66%  { transform: translate(-20%, 40%) rotate(240deg); }
+  100% { transform: translate(0, 0) rotate(360deg); }
+}
+
+@keyframes drift-beta {
+  0%   { transform: translate(0, 0) rotate(0deg); }
+  33%  { transform: translate(-25%, 30%) rotate(-90deg); }
+  66%  { transform: translate(40%, 15%) rotate(-180deg); }
+  100% { transform: translate(0, 0) rotate(-360deg); }
+}
+
+@keyframes drift-gamma {
+  0%   { transform: translate(0, 0) rotate(0deg); }
+  33%  { transform: translate(20%, 35%) rotate(180deg); }
+  66%  { transform: translate(-35%, -25%) rotate(270deg); }
+  100% { transform: translate(0, 0) rotate(450deg); }
 }
 
 .glass-panel {
@@ -396,7 +413,7 @@ body.loaded {
   border-radius: 50%;
   filter: blur(70px);
   opacity: 0.45;
-  animation: drift 20s infinite alternate ease-in-out;
+  animation: drift-alpha 28s infinite alternate ease-in-out;
   pointer-events: none;
 }
 
