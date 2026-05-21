@@ -226,12 +226,29 @@ const ROLE_MODULES = {
 const LOCK_ICON = `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>`
 const UNLOCK_ICON = `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 9.9-1"></path></svg>`
 
+const ROLE_ORDER = ['USER', 'CREATOR', 'DEVELOPER']
+const ROLE_CYCLE_MS = 9000
 let activeRole = 'USER'
 
 const roleButtons = document.querySelectorAll('.role-btn')
 const activeRoleLabel = document.getElementById('active-role')
 const featuresList = document.getElementById('role-features')
 const moduleGrid = document.getElementById('module-grid')
+
+// Build module cells once so class toggles can animate instead of re-mounting nodes.
+const moduleCellRefs = new Map()
+if (moduleGrid) {
+  moduleGrid.innerHTML = MODULES.map(
+    (mod) =>
+      `<div class="module-cell" data-module-id="${mod.id}"><span class="module-label">${mod.label}</span><span class="module-status flex items-center gap-1.5"></span></div>`
+  ).join('')
+  moduleGrid.querySelectorAll('[data-module-id]').forEach((el) => {
+    moduleCellRefs.set(el.dataset.moduleId, {
+      cell: el,
+      status: el.querySelector('.module-status'),
+    })
+  })
+}
 
 function renderAccessMatrix() {
   if (activeRoleLabel) {
@@ -248,15 +265,27 @@ function renderAccessMatrix() {
       )
       .join('')
   }
-  if (moduleGrid) {
-    const unlockedSet = new Set(ROLE_MODULES[activeRole])
-    moduleGrid.innerHTML = MODULES.map((mod) => {
-      const isUnlocked = unlockedSet.has(mod.id)
-      const cls = isUnlocked ? 'module-cell unlocked' : 'module-cell'
-      const status = isUnlocked ? 'Unlocked' : 'Locked'
-      const icon = isUnlocked ? UNLOCK_ICON : LOCK_ICON
-      return `<div class="${cls}"><span class="module-label">${mod.label}</span><span class="module-status flex items-center gap-1.5">${icon}${status}</span></div>`
-    }).join('')
+  const unlockedSet = new Set(ROLE_MODULES[activeRole])
+  moduleCellRefs.forEach((refs, modId) => {
+    const isUnlocked = unlockedSet.has(modId)
+    refs.cell.classList.toggle('unlocked', isUnlocked)
+    refs.status.innerHTML = `${isUnlocked ? UNLOCK_ICON : LOCK_ICON}${isUnlocked ? 'Unlocked' : 'Locked'}`
+  })
+}
+
+let roleCycleTimer = null
+function startRoleCycle() {
+  stopRoleCycle()
+  roleCycleTimer = setInterval(() => {
+    const nextIndex = (ROLE_ORDER.indexOf(activeRole) + 1) % ROLE_ORDER.length
+    activeRole = ROLE_ORDER[nextIndex]
+    renderAccessMatrix()
+  }, ROLE_CYCLE_MS)
+}
+function stopRoleCycle() {
+  if (roleCycleTimer !== null) {
+    clearInterval(roleCycleTimer)
+    roleCycleTimer = null
   }
 }
 
@@ -264,10 +293,13 @@ roleButtons.forEach((btn) => {
   btn.addEventListener('click', () => {
     activeRole = btn.dataset.role
     renderAccessMatrix()
+    // Restart the cycle from the user's pick so manual clicks don't fight the auto-rotation.
+    startRoleCycle()
   })
 })
 
 renderAccessMatrix()
+startRoleCycle()
 
 const LOG_LINES = [
   '> INITIALIZING_SECURE_TUNNEL...',
