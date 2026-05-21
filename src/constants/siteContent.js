@@ -8,7 +8,7 @@ export const SITE_CONTENT = {
   },
   capabilities: [
     {
-      number: '01',
+      number: 'High-Integrity',
       title: 'Precision Architecture',
       body: 'Deterministic routing for complex datasets ensuring zero dropped events in critical paths.',
       specs: [
@@ -18,7 +18,7 @@ export const SITE_CONTENT = {
       ],
     },
     {
-      number: '02',
+      number: 'Low-Latency',
       title: 'High-Fidelity Media',
       body: 'Optimized streaming for high-res protocol videos and real-time interactive telemetry.',
       specs: [
@@ -28,7 +28,7 @@ export const SITE_CONTENT = {
       ],
     },
     {
-      number: '03',
+      number: 'Encrypted',
       title: 'Secure Cryptography',
       body: 'Quantum-resistant primitives for end-to-end encryption of sensitive proprietary data.',
       specs: [
