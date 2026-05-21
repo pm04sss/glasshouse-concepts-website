@@ -1,4 +1,29 @@
 import './style.css'
+import { SITE_CONTENT } from './constants/siteContent.js'
+
+function hydrateContent() {
+  const heroEyebrow = document.getElementById('hero-eyebrow')
+  const heroPrefix = document.getElementById('hero-headline-prefix')
+  const heroAccent = document.getElementById('hero-headline-accent')
+  const heroSub = document.getElementById('hero-subheadline')
+
+  if (heroEyebrow) heroEyebrow.textContent = SITE_CONTENT.hero.eyebrow
+  if (heroPrefix) heroPrefix.textContent = SITE_CONTENT.hero.headlinePrefix
+  if (heroAccent) heroAccent.textContent = SITE_CONTENT.hero.headlineAccent
+  if (heroSub) heroSub.textContent = SITE_CONTENT.hero.subheadline
+
+  const numberSlots = document.querySelectorAll('[data-capability-number]')
+  const titleSlots = document.querySelectorAll('[data-capability-title]')
+  const bodySlots = document.querySelectorAll('[data-capability-body]')
+  SITE_CONTENT.capabilities.forEach((cap, i) => {
+    if (numberSlots[i]) numberSlots[i].textContent = cap.number
+    if (titleSlots[i]) titleSlots[i].textContent = cap.title
+    if (bodySlots[i]) bodySlots[i].textContent = cap.body
+  })
+}
+
+hydrateContent()
+
 
 const latencyHistory = []
 const HISTORY_MAX = 10
