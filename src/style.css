@@ -43,7 +43,6 @@ body.loaded {
   opacity: 0.25;
   top: -10%;
   left: -10%;
-  animation: floatOrb1 1.5s infinite alternate ease-in-out;
 }
 
 .orb-2 {
@@ -52,17 +51,15 @@ body.loaded {
   opacity: 0.25;
   bottom: -20%;
   right: -10%;
-  animation: floatOrb2 2s infinite alternate ease-in-out;
 }
 
 .orb-3 {
   width: 27vw;
   background: radial-gradient(circle, #818cf8, #4f46e5);
   opacity: 0.25;
-  top: 40%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  animation: floatOrb3 2.2s infinite alternate ease-in-out;
+  /* centered around (50%, 40%) via math so the drift transform isn't overridden */
+  top: calc(40% - 13.5vw);
+  left: calc(50% - 13.5vw);
 }
 
 .orb-4 {
@@ -71,7 +68,6 @@ body.loaded {
   opacity: 0.25;
   top: 10%;
   right: 10%;
-  animation: floatOrb4 2.5s infinite alternate ease-in-out;
 }
 
 .orb-5 {
@@ -80,28 +76,20 @@ body.loaded {
   opacity: 0.25;
   bottom: 30%;
   left: 20%;
-  animation: floatOrb1 3s infinite alternate ease-in-out;
-  animation-delay: -4s;
 }
 
-@keyframes floatOrb1 {
-  0%   { transform: translate(0,    0   ) scale(1);   }
-  100% { transform: translate(20%,  30% ) scale(1.1); }
+/* Autonomous drift utility classes — pair the keyframes from sprint 242
+   with their tuned durations so a class alone runs the full animation. */
+.animate-drift-alpha {
+  animation: drift-alpha 26s infinite alternate ease-in-out;
 }
 
-@keyframes floatOrb2 {
-  0%   { transform: translate(0,    0   ) scale(1);   }
-  100% { transform: translate(-30%, -20%) scale(0.9); }
+.animate-drift-beta {
+  animation: drift-beta 32s infinite alternate ease-in-out;
 }
 
-@keyframes floatOrb3 {
-  0%   { transform: translate(-50%, -50%) scale(1);   }
-  100% { transform: translate(-20%, -80%) scale(1.2); }
-}
-
-@keyframes floatOrb4 {
-  0%   { transform: translate(0,    0   ) rotate(0deg);   }
-  100% { transform: translate(-40%, 40%) rotate(90deg);   }
+.animate-drift-gamma {
+  animation: drift-gamma 22s infinite alternate ease-in-out;
 }
 
 .aurora-container {
