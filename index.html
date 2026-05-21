@@ -202,11 +202,15 @@
 
         <div class="mt-12 glass-panel p-12 rounded-[2rem] flex flex-wrap justify-around gap-12 text-center border border-white/5">
             <div>
-                <div class="text-4xl font-bold text-white mb-2">99.99%</div>
+                <div class="text-4xl font-bold text-white mb-2">
+                    <span class="metric-counter" data-target="99.99" data-decimals="2">0.00</span><span class="metric-suffix">%</span>
+                </div>
                 <div class="text-slate-500 text-[10px] font-mono tracking-widest uppercase">Uptime SLA</div>
             </div>
             <div>
-                <div class="text-4xl font-bold text-white mb-2">&lt;50ms</div>
+                <div class="text-4xl font-bold text-white mb-2">
+                    &lt;<span class="metric-counter" data-target="50" data-decimals="0">0</span><span class="metric-suffix">ms</span>
+                </div>
                 <div class="text-slate-500 text-[10px] font-mono tracking-widest uppercase">Global Edge Latency</div>
             </div>
             <div>

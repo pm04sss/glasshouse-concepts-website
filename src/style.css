@@ -446,3 +446,10 @@ body.loaded {
 .integrity-hash-value {
   transition: opacity 120ms ease;
 }
+
+/* Metric suffix — slightly brighter sky glow than the numeral itself */
+.metric-suffix {
+  color: #38bdf8;
+  text-shadow: 0 0 12px rgba(56, 189, 248, 0.7);
+  margin-left: 2px;
+}

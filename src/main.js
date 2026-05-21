@@ -50,6 +50,51 @@ function startIntegritySeal() {
 
 startIntegritySeal()
 
+function startMetricCounters() {
+  const counters = document.querySelectorAll('.metric-counter')
+  if (!counters.length) return
+  if (typeof IntersectionObserver === 'undefined') {
+    counters.forEach((el) => {
+      const target = parseFloat(el.dataset.target)
+      const decimals = parseInt(el.dataset.decimals || '0', 10)
+      el.textContent = target.toFixed(decimals)
+    })
+    return
+  }
+
+  const animate = (el) => {
+    const target = parseFloat(el.dataset.target)
+    const decimals = parseInt(el.dataset.decimals || '0', 10)
+    const duration = 1600
+    const start = performance.now()
+    const step = (now) => {
+      const t = Math.min((now - start) / duration, 1)
+      const eased = 1 - Math.pow(1 - t, 4)
+      el.textContent = (target * eased).toFixed(decimals)
+      if (t < 1) requestAnimationFrame(step)
+      else el.textContent = target.toFixed(decimals)
+    }
+    requestAnimationFrame(step)
+  }
+
+  const io = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting && !entry.target.dataset.counted) {
+          entry.target.dataset.counted = '1'
+          animate(entry.target)
+          io.unobserve(entry.target)
+        }
+      })
+    },
+    { threshold: 0.5 }
+  )
+
+  counters.forEach((c) => io.observe(c))
+}
+
+startMetricCounters()
+
 
 const latencyHistory = []
 const HISTORY_MAX = 10
