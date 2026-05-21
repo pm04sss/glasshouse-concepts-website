@@ -183,7 +183,7 @@
             </div>
         </div>
 
-        <div class="mt-32 vitals-card relative overflow-hidden rounded-3xl p-10 md:p-12">
+        <div class="mt-8 vitals-card relative overflow-hidden rounded-3xl p-10 md:p-12">
             <div class="relative z-10 flex items-start justify-between mb-8 flex-wrap gap-4">
                 <div>
                     <span class="text-sky-400 font-mono text-xs tracking-widest uppercase block mb-2">// System Vitals</span>
@@ -193,9 +193,27 @@
                     <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> Live
                 </span>
             </div>
-            <div class="relative z-10 flex items-baseline gap-4">
-                <span class="text-slate-500 font-mono text-[10px] tracking-widest uppercase">System Latency</span>
-                <span id="vitals-latency-large" class="text-5xl md:text-7xl font-bold tabular-nums text-white">--ms</span>
+            <div class="relative z-10 grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
+                <div class="flex flex-col gap-2">
+                    <span class="text-slate-500 font-mono text-[10px] tracking-widest uppercase">System Latency</span>
+                    <span id="vitals-latency-large" class="text-3xl md:text-5xl font-bold tabular-nums text-white">--ms</span>
+                </div>
+                <div class="flex flex-col gap-2">
+                    <span class="text-slate-500 font-mono text-[10px] tracking-widest uppercase">Throughput</span>
+                    <span class="text-3xl md:text-5xl font-bold tabular-nums text-white">
+                        <span id="vitals-throughput">1.20</span><span class="text-xl md:text-2xl text-slate-400 font-mono ml-1">GB/s</span>
+                    </span>
+                </div>
+                <div class="flex flex-col gap-2">
+                    <span class="text-slate-500 font-mono text-[10px] tracking-widest uppercase">Active Handshakes</span>
+                    <span id="vitals-handshakes" class="text-3xl md:text-5xl font-bold tabular-nums text-white">4,102</span>
+                </div>
+                <div class="flex flex-col gap-2">
+                    <span class="text-slate-500 font-mono text-[10px] tracking-widest uppercase">Integrity Score</span>
+                    <span class="text-3xl md:text-5xl font-bold tabular-nums text-white">
+                        <span id="vitals-integrity">100</span><span class="text-xl md:text-2xl text-emerald-400 font-mono">%</span>
+                    </span>
+                </div>
             </div>
         </div>
 

@@ -145,6 +145,18 @@ const TICK_INTERVAL_MS = 1500
 
 const latencyEl = document.getElementById('vitals-latency')
 const latencyLargeEl = document.getElementById('vitals-latency-large')
+const throughputEl = document.getElementById('vitals-throughput')
+const handshakesEl = document.getElementById('vitals-handshakes')
+const integrityEl = document.getElementById('vitals-integrity')
+
+// Simulated metric base values + drift bounds.
+let throughputGBs = 1.20
+let activeHandshakes = 4102
+let integrityScore = 100.0
+
+function clamp(value, min, max) {
+  return Math.min(Math.max(value, min), max)
+}
 
 function tickTelemetry() {
   const latency = Math.floor(Math.random() * (MAX_MS - MIN_MS + 1)) + MIN_MS
@@ -153,12 +165,20 @@ function tickTelemetry() {
     latencyHistory.shift()
   }
   const formatted = `${latency}ms`
-  if (latencyEl) {
-    latencyEl.textContent = formatted
-  }
-  if (latencyLargeEl) {
-    latencyLargeEl.textContent = formatted
-  }
+  if (latencyEl) latencyEl.textContent = formatted
+  if (latencyLargeEl) latencyLargeEl.textContent = formatted
+
+  // Throughput: random walk around 1.20 GB/s, bounded 1.05–1.40.
+  throughputGBs = clamp(throughputGBs + (Math.random() - 0.5) * 0.08, 1.05, 1.40)
+  if (throughputEl) throughputEl.textContent = throughputGBs.toFixed(2)
+
+  // Active handshakes: integer random walk around 4,100, bounded 3,900–4,300.
+  activeHandshakes = clamp(activeHandshakes + Math.floor((Math.random() - 0.5) * 60), 3900, 4300)
+  if (handshakesEl) handshakesEl.textContent = activeHandshakes.toLocaleString('en-US')
+
+  // Integrity score: holds at 100, ~5% chance of a 99.9 micro-dip for credibility.
+  integrityScore = Math.random() < 0.05 ? 99.9 : 100.0
+  if (integrityEl) integrityEl.textContent = integrityScore === 100 ? '100' : integrityScore.toFixed(1)
 }
 
 tickTelemetry()
