@@ -398,3 +398,7 @@ body.loaded {
     transparent 4px
   );
 }
+
+.integrity-hash-value {
+  transition: opacity 120ms ease;
+}

@@ -24,6 +24,32 @@ function hydrateContent() {
 
 hydrateContent()
 
+function generateIntegrityHash() {
+  const bytes = new Uint8Array(16)
+  crypto.getRandomValues(bytes)
+  let hex = '0x'
+  for (let i = 0; i < bytes.length; i++) {
+    hex += bytes[i].toString(16).padStart(2, '0')
+  }
+  return hex
+}
+
+function startIntegritySeal() {
+  const el = document.getElementById('integrity-hash')
+  if (!el) return
+  const tick = () => {
+    el.style.opacity = '0.15'
+    setTimeout(() => {
+      el.textContent = generateIntegrityHash()
+      el.style.opacity = '1'
+    }, 120)
+  }
+  tick()
+  setInterval(tick, 3000)
+}
+
+startIntegritySeal()
+
 
 const latencyHistory = []
 const HISTORY_MAX = 10

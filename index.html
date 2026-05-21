@@ -220,11 +220,15 @@
         <span id="system-log-text"></span><span class="system-log-caret">█</span>
     </div>
 
-    <footer class="py-20 text-center border-t border-white/5 mt-20">
+    <footer class="relative py-20 text-center border-t border-white/5 mt-20">
         <div class="text-slate-500 font-mono text-[10px] tracking-[0.5em] uppercase italic mb-4">
             Glasshouse Concepts &copy; 2026 // Based in QLD, Australia
         </div>
         <div class="text-slate-600 text-[9px] font-mono uppercase tracking-widest">System Status: Secure</div>
+        <div class="md:absolute md:bottom-4 md:right-6 mt-6 md:mt-0 font-mono text-xs text-slate-500 tracking-wider">
+            <span class="text-slate-600">SECURE_HASH_INTEGRITY:</span>
+            <span id="integrity-hash" class="text-emerald-400/80 integrity-hash-value">0x0000000000000000000000000000000000</span>
+        </div>
     </footer>
     <script>
         window.addEventListener('load', function () {
