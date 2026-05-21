@@ -38,7 +38,7 @@ body.loaded {
 }
 
 .orb-1 {
-  width: 35vw;
+  width: 300px;
   background: radial-gradient(circle, #38bdf8, #1d4ed8);
   opacity: 0.25;
   top: -10%;
@@ -46,7 +46,7 @@ body.loaded {
 }
 
 .orb-2 {
-  width: 32vw;
+  width: 270px;
   background: radial-gradient(circle, #10b981, #059669);
   opacity: 0.25;
   bottom: -20%;
@@ -54,16 +54,16 @@ body.loaded {
 }
 
 .orb-3 {
-  width: 27vw;
+  width: 240px;
   background: radial-gradient(circle, #818cf8, #4f46e5);
   opacity: 0.25;
   /* centered around (50%, 40%) via math so the drift transform isn't overridden */
-  top: calc(40% - 13.5vw);
-  left: calc(50% - 13.5vw);
+  top: calc(40% - 120px);
+  left: calc(50% - 120px);
 }
 
 .orb-4 {
-  width: 22vw;
+  width: 200px;
   background: radial-gradient(circle, #38bdf8, #0ea5e9);
   opacity: 0.25;
   top: 10%;
@@ -71,7 +71,7 @@ body.loaded {
 }
 
 .orb-5 {
-  width: 25vw;
+  width: 220px;
   background: radial-gradient(circle, #818cf8, #4f46e5);
   opacity: 0.25;
   bottom: 30%;
