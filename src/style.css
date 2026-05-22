@@ -615,6 +615,15 @@ body.loaded {
   display: none;
 }
 
+/* Aegis Vault scanning sweep — horizontal beam riding the progress track */
+@keyframes vault-scan-sweep {
+  0%   { left: -33%; }
+  100% { left: 100%; }
+}
+.vault-scan-bar {
+  animation: vault-scan-sweep 2.4s linear infinite;
+}
+
 /* Metric suffix — neutral white to match the numeral; glow lives on the labels only */
 .metric-suffix {
   color: #ffffff;
