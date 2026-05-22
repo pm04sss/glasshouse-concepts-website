@@ -606,10 +606,9 @@ body.loaded {
   transition: opacity 120ms ease;
 }
 
-/* Metric suffix — slightly brighter sky glow than the numeral itself */
+/* Metric suffix — neutral white to match the numeral; glow lives on the labels only */
 .metric-suffix {
-  color: #38bdf8;
-  text-shadow: 0 0 12px rgba(56, 189, 248, 0.7);
+  color: #ffffff;
   margin-left: 2px;
 }
 
