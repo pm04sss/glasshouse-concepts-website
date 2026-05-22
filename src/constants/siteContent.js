@@ -1,8 +1,8 @@
 export const SITE_CONTENT = {
   hero: {
     eyebrow: '// Systems Architecture',
-    headlinePrefix: 'Engineering Apps for',
-    headlineAccent: 'Digital Excellence.',
+    headlinePrefix: 'Engineering Apps with',
+    headlineAccent: 'Clinical Precision.',
     subheadline:
       'Architecting high-integrity digital infrastructure for elite creators and specialized markets. Precision software, uncompromised security, and zero-latency routing.',
   },
