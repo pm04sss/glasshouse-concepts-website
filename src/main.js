@@ -273,10 +273,15 @@ function renderAccessMatrix() {
   })
 }
 
+const MANUAL_PAUSE_MS = 20000
 let roleCycleTimer = null
+let pauseTimer = null
+let isPaused = false
+
 function startRoleCycle() {
   stopRoleCycle()
   roleCycleTimer = setInterval(() => {
+    if (isPaused) return
     const nextIndex = (ROLE_ORDER.indexOf(activeRole) + 1) % ROLE_ORDER.length
     activeRole = ROLE_ORDER[nextIndex]
     renderAccessMatrix()
@@ -288,13 +293,24 @@ function stopRoleCycle() {
     roleCycleTimer = null
   }
 }
+function clearPauseTimer() {
+  if (pauseTimer !== null) {
+    clearTimeout(pauseTimer)
+    pauseTimer = null
+  }
+}
 
 roleButtons.forEach((btn) => {
   btn.addEventListener('click', () => {
     activeRole = btn.dataset.role
     renderAccessMatrix()
-    // Restart the cycle from the user's pick so manual clicks don't fight the auto-rotation.
-    startRoleCycle()
+    // Manual selection holds for 20s before the autonomous cycle resumes.
+    isPaused = true
+    clearPauseTimer()
+    pauseTimer = setTimeout(() => {
+      isPaused = false
+      pauseTimer = null
+    }, MANUAL_PAUSE_MS)
   })
 })
 
