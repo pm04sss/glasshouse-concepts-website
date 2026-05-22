@@ -120,8 +120,9 @@
             <h2 class="text-4xl md:text-6xl font-bold tracking-tighter leading-tight mb-6 relative z-10">Apps Built for Reliability.</h2>
             <p class="text-slate-300 text-lg md:text-xl max-w-2xl font-light leading-relaxed mx-auto relative z-10">Our core engine operates behind a zero-trust perimeter, ensuring mission-critical data remains immutable and accessible.</p>
 
-            <!-- App Showcase: horizontal mock-up gallery -->
-            <div class="app-showcase mt-12 relative z-10 flex overflow-x-auto gap-6 -mx-12 md:-mx-24 px-12 md:px-24 pb-4 text-left">
+            <!-- App Showcase: horizontal marquee gallery (infinite scroll) -->
+            <div class="app-showcase mt-12 relative z-10 overflow-hidden -mx-12 md:-mx-24 pb-4 text-left" style="mask-image: linear-gradient(to right, transparent 0, #000 6%, #000 94%, transparent 100%); -webkit-mask-image: linear-gradient(to right, transparent 0, #000 6%, #000 94%, transparent 100%);">
+              <div class="app-showcase-track flex gap-6 w-max animate-infinite-scroll pause-on-hover">
 
                 <!-- Slot 1: VitalsOS — biometric monitor -->
                 <div class="app-tile shrink-0 w-64 h-96 bg-slate-900/80 rounded-xl border border-white/10 shadow-2xl relative transition-transform duration-300 ease-out hover:scale-105 hover:z-10 overflow-hidden">
@@ -281,6 +282,7 @@
                     </div>
                 </div>
 
+              </div>
             </div>
         </div>
 

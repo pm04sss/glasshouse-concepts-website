@@ -361,3 +361,16 @@ if (logTextEl) {
 
   stepLog()
 }
+
+// App Showcase marquee: clone the tile set once so the -50% translate lands
+// exactly on the second copy, producing a seamless loop. Clones are
+// aria-hidden so screen readers don't double-announce the tiles.
+const showcaseTrack = document.querySelector('.app-showcase-track')
+if (showcaseTrack) {
+  const originals = Array.from(showcaseTrack.children)
+  originals.forEach((node) => {
+    const clone = node.cloneNode(true)
+    clone.setAttribute('aria-hidden', 'true')
+    showcaseTrack.appendChild(clone)
+  })
+}
