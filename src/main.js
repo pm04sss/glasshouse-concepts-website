@@ -609,24 +609,23 @@ function renderShowcaseTile(mod) {
   const visualFn = SHOWCASE_VISUALS[mod.visual]
   const visual = visualFn ? visualFn(mod.accent) : ''
   return `<div class="app-tile snap-center shrink-0 w-64 h-96 bg-slate-900/80 rounded-xl border shadow-2xl relative transition-transform duration-300 ease-out hover:scale-105 hover:z-10 overflow-hidden" style="border-color:${mod.accent}33;">
-    <div class="w-full h-full bg-slate-950/40 p-4 flex flex-col gap-3">
-      <!-- TOP: Name (large bold) + Tech detail (mono 40%) + category pill -->
-      <div class="flex items-start justify-between gap-2">
-        <div class="flex flex-col min-w-0">
-          <span class="font-mono text-sm font-bold tracking-wider uppercase truncate" style="color:${mod.accent}; text-shadow:0 0 6px ${mod.accent}66;">${mod.name}</span>
-          <span class="text-[8px] uppercase tracking-tighter opacity-40 font-mono text-slate-300 leading-tight mt-0.5">${mod.techDetail}</span>
-        </div>
-        <span class="flex items-center gap-1 text-[8px] font-mono text-slate-400 uppercase tracking-wider shrink-0 pt-1">
+    <div class="w-full h-full bg-slate-950/40 p-4 flex flex-col">
+      <!-- ID strip — tiny module name + category pill, kept as chrome only -->
+      <div class="flex items-center justify-between gap-2 mb-2">
+        <span class="font-mono text-[9px] tracking-[0.25em] uppercase truncate opacity-70" style="color:${mod.accent};">${mod.name}</span>
+        <span class="flex items-center gap-1 text-[8px] font-mono text-slate-400 uppercase tracking-wider shrink-0">
           <span class="w-1.5 h-1.5 rounded-full animate-pulse" style="background:${mod.accent}; box-shadow:0 0 4px ${mod.accent};"></span>${mod.category}
         </span>
       </div>
-      <!-- MIDDLE: visual canvas, fills remaining space -->
+      <!-- TOP: Hook — layman benefit leads with sky-400 bold text-sm -->
+      <div class="text-sky-400 font-bold text-sm mb-3 leading-snug">${mod.laymanBenefit}</div>
+      <!-- CENTER: Theoretical UI — the visual icon fills the remaining height -->
       <div class="flex-1 rounded-md border bg-slate-950/60 p-3 flex items-center justify-center overflow-hidden" style="border-color:${mod.accent}22;">
         ${visual}
       </div>
-      <!-- BOTTOM: Layman benefit (sky-blue bold) above the diagnostic footer -->
-      <div class="text-[11px] font-bold text-sky-400 leading-snug">${mod.laymanBenefit}</div>
-      <div class="flex items-center justify-between text-[8px] font-mono pt-1 border-t border-white/5">
+      <!-- BOTTOM: Proof — technical subtitle in subtle secondary white/60 -->
+      <div class="text-white/60 text-[10px] font-normal mt-3 font-mono uppercase tracking-wider leading-snug">${mod.techDetail}</div>
+      <div class="flex items-center justify-between text-[8px] font-mono pt-2 mt-2 border-t border-white/5">
         <span class="text-slate-500 tracking-wider">${mod.stat}</span>
         <span style="color:${mod.accent}cc;">${mod.metric}</span>
       </div>
