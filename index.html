@@ -310,15 +310,10 @@
             <div class="bg-slate-950/40 backdrop-blur-xl rounded-xl border border-white/10 p-8 relative overflow-hidden md:w-[65%]">
                 <div class="scanline-overlay opacity-30"></div>
                 <div class="relative z-10">
-                    <div class="flex items-start justify-between mb-8 flex-wrap gap-3">
-                        <div>
-                            <span class="text-sky-400 font-mono text-[10px] tracking-[0.3em] uppercase block mb-2">// Secure Channel</span>
-                            <h2 class="font-mono text-2xl md:text-3xl font-bold tracking-tight text-white whitespace-nowrap">Initialize Inquiry</h2>
-                            <p class="text-slate-400 text-sm mt-2 leading-relaxed">Open a transmission. Qualified inquiries answered within 24 hours.</p>
-                        </div>
-                        <span class="flex items-center gap-2 text-[10px] font-mono uppercase tracking-widest text-emerald-400 shrink-0">
-                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span> Awaiting Input
-                        </span>
+                    <div class="mb-8">
+                        <span class="text-sky-400 font-mono text-[10px] tracking-[0.3em] uppercase block mb-2">// Secure Channel</span>
+                        <h2 class="font-mono text-2xl md:text-3xl font-bold tracking-tight text-white whitespace-nowrap">Initialize Inquiry</h2>
+                        <p class="text-slate-400 text-sm mt-2 leading-relaxed">Open a transmission. Qualified inquiries answered within 24 hours.</p>
                     </div>
 
                     <form id="inquiry-form" class="flex flex-col gap-6" novalidate>
@@ -345,7 +340,6 @@
                             <span id="inquiry-status" class="font-mono text-[10px] tracking-widest uppercase text-slate-500" aria-live="polite">STATUS: Ready</span>
                             <button id="inquiry-submit" type="submit"
                                     class="submit-data group inline-flex items-center gap-3 px-6 py-3 border border-emerald-500/40 bg-emerald-500/5 text-emerald-300 font-mono text-xs tracking-[0.3em] uppercase rounded-lg transition-all duration-300 hover:bg-emerald-500/15 hover:border-emerald-400 hover:text-emerald-200 hover:shadow-[0_0_24px_rgba(16,185,129,0.45)] focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400/60 disabled:opacity-60 disabled:cursor-not-allowed">
-                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 group-hover:animate-pulse"></span>
                                 <span id="inquiry-submit-label">SUBMIT_DATA</span>
                                 <span aria-hidden="true" class="transition-transform group-hover:translate-x-1">→</span>
                             </button>
