@@ -627,6 +627,23 @@ function renderShowcaseTile(mod) {
   </div>`
 }
 
+// Dynamic shrinking header — toggle .is-scrolled past 50px scroll.
+// Uses a passive scroll listener and an internal flag so we only touch
+// classList when the scrolled state actually flips, not on every frame.
+const siteNav = document.getElementById('site-nav')
+if (siteNav) {
+  let isScrolled = false
+  const updateNavScrollState = () => {
+    const scrolled = window.scrollY > 50
+    if (scrolled !== isScrolled) {
+      isScrolled = scrolled
+      siteNav.classList.toggle('is-scrolled', scrolled)
+    }
+  }
+  window.addEventListener('scroll', updateNavScrollState, { passive: true })
+  updateNavScrollState()
+}
+
 const showcaseTrack = document.querySelector('.app-showcase-track')
 if (showcaseTrack) {
   showcaseTrack.innerHTML = SHOWCASE_MODULES.map(renderShowcaseTile).join('')

@@ -606,6 +606,18 @@ body.loaded {
   transition: opacity 120ms ease;
 }
 
+/* Dynamic shrinking header — when window.scrollY > 50, JS toggles .is-scrolled
+   on #site-nav. The padding override transitions via the nav's existing
+   transition-all class for a smooth shrink. The logo also scales down to
+   match the tighter bar height. */
+#site-nav.is-scrolled {
+  padding-top: 3px;
+  padding-bottom: 3px;
+}
+#site-nav.is-scrolled img {
+  height: 1.5rem;
+}
+
 /* App showcase — infinite-marquee track.
    The track holds two identical copies of the tile set (the JS clone runs
    on init). Translating -50% lands exactly on the start of the second copy,
