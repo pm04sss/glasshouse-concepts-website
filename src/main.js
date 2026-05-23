@@ -608,7 +608,7 @@ const SHOWCASE_VISUALS = {
 function renderShowcaseTile(mod) {
   const visualFn = SHOWCASE_VISUALS[mod.visual]
   const visual = visualFn ? visualFn(mod.accent) : ''
-  return `<div class="app-tile shrink-0 w-64 h-96 bg-slate-900/80 rounded-xl border shadow-2xl relative transition-transform duration-300 ease-out hover:scale-105 hover:z-10 overflow-hidden" style="border-color:${mod.accent}33;">
+  return `<div class="app-tile snap-center shrink-0 w-64 h-96 bg-slate-900/80 rounded-xl border shadow-2xl relative transition-transform duration-300 ease-out hover:scale-105 hover:z-10 overflow-hidden" style="border-color:${mod.accent}33;">
     <div class="w-full h-full bg-slate-950/40 p-4 flex flex-col gap-3">
       <div class="flex items-center justify-between">
         <span class="font-mono text-[10px] tracking-widest uppercase" style="color:${mod.accent}; text-shadow:0 0 6px ${mod.accent}66;">${mod.name}</span>
@@ -644,14 +644,123 @@ if (siteNav) {
   updateNavScrollState()
 }
 
+// Interactive module showcase — converts the CSS marquee into a JS-driven
+// scroll container so the user can grab/flick/wheel through the 20 modules,
+// with native scroll-snap centering each card when interaction settles.
+// Auto-scroll resumes whenever the pointer leaves the strip.
+const showcase = document.querySelector('.app-showcase')
 const showcaseTrack = document.querySelector('.app-showcase-track')
-if (showcaseTrack) {
+if (showcase && showcaseTrack) {
   showcaseTrack.innerHTML = SHOWCASE_MODULES.map(renderShowcaseTile).join('')
-  // Duplicate the rendered set for the seamless marquee loop.
+  // Duplicate the rendered set so the autonomous scroll can wrap seamlessly.
   const originals = Array.from(showcaseTrack.children)
   originals.forEach((node) => {
     const clone = node.cloneNode(true)
     clone.setAttribute('aria-hidden', 'true')
     showcaseTrack.appendChild(clone)
   })
+
+  const AUTO_SPEED_PX_PER_SEC = 40
+  const KEY_STEP_PX = 280 // tile width (256) + gap (24) — one card per arrow press
+  let isHovering = false
+  let isDragging = false
+  let dragStartX = 0
+  let dragStartScroll = 0
+  let lastTs = 0
+  let rafId = 0
+
+  // Snap fights per-frame scrollLeft writes, so we disable it during the
+  // autonomous loop and re-engage it the moment the user takes over.
+  const engageSnap = () => { showcase.style.scrollSnapType = 'x mandatory' }
+  const disengageSnap = () => { showcase.style.scrollSnapType = 'none' }
+  disengageSnap()
+
+  const onEnter = () => { isHovering = true; engageSnap() }
+  const onLeave = () => { isHovering = false; if (!isDragging) disengageSnap() }
+  const onDown = (e) => {
+    isDragging = true
+    dragStartX = e.pageX
+    dragStartScroll = showcase.scrollLeft
+    showcase.style.scrollSnapType = 'none'
+    e.preventDefault()
+  }
+  const onMove = (e) => {
+    if (!isDragging) return
+    showcase.scrollLeft = dragStartScroll - (e.pageX - dragStartX)
+  }
+  const onUp = () => {
+    if (!isDragging) return
+    isDragging = false
+    if (isHovering) engageSnap()
+    else disengageSnap()
+  }
+  const onWheel = (e) => {
+    if (!isHovering) return
+    if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+      e.preventDefault()
+      showcase.scrollLeft += e.deltaY
+    }
+  }
+  // Keyboard navigation — arrow keys step one card; Home/End jump to ends.
+  // Engaging snap before scrollBy lets the browser snap to the nearest card.
+  const onKey = (e) => {
+    const halfWidth = showcaseTrack.scrollWidth / 2
+    let handled = true
+    engageSnap()
+    if (e.key === 'ArrowRight') showcase.scrollBy({ left: KEY_STEP_PX, behavior: 'smooth' })
+    else if (e.key === 'ArrowLeft') showcase.scrollBy({ left: -KEY_STEP_PX, behavior: 'smooth' })
+    else if (e.key === 'Home') showcase.scrollTo({ left: 0, behavior: 'smooth' })
+    else if (e.key === 'End') showcase.scrollTo({ left: halfWidth - KEY_STEP_PX, behavior: 'smooth' })
+    else handled = false
+    if (handled) {
+      e.preventDefault()
+      // Treat keyboard interaction like hover — pause autonomous drift until blur.
+      isHovering = true
+    }
+  }
+  const onBlur = () => { isHovering = false; disengageSnap() }
+  const onFocus = () => { isHovering = true; engageSnap() }
+
+  showcase.addEventListener('mouseenter', onEnter)
+  showcase.addEventListener('mouseleave', onLeave)
+  showcase.addEventListener('mousedown', onDown)
+  window.addEventListener('mousemove', onMove)
+  window.addEventListener('mouseup', onUp)
+  showcase.addEventListener('wheel', onWheel, { passive: false })
+  showcase.addEventListener('keydown', onKey)
+  showcase.addEventListener('focus', onFocus)
+  showcase.addEventListener('blur', onBlur)
+
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  const step = (ts) => {
+    if (!lastTs) lastTs = ts
+    const dt = ts - lastTs
+    lastTs = ts
+    if (!isHovering && !isDragging && !prefersReducedMotion) {
+      const halfWidth = showcaseTrack.scrollWidth / 2
+      let next = showcase.scrollLeft + (AUTO_SPEED_PX_PER_SEC * dt) / 1000
+      if (next >= halfWidth) next -= halfWidth
+      showcase.scrollLeft = next
+    }
+    rafId = requestAnimationFrame(step)
+  }
+  rafId = requestAnimationFrame(step)
+
+  // Vite HMR cleanup — without this the rAF loop and all listeners stack on
+  // every hot reload during development, causing CPU drift and duplicate
+  // handlers. No-op in production builds.
+  if (import.meta.hot) {
+    import.meta.hot.dispose(() => {
+      cancelAnimationFrame(rafId)
+      showcase.removeEventListener('mouseenter', onEnter)
+      showcase.removeEventListener('mouseleave', onLeave)
+      showcase.removeEventListener('mousedown', onDown)
+      window.removeEventListener('mousemove', onMove)
+      window.removeEventListener('mouseup', onUp)
+      showcase.removeEventListener('wheel', onWheel)
+      showcase.removeEventListener('keydown', onKey)
+      showcase.removeEventListener('focus', onFocus)
+      showcase.removeEventListener('blur', onBlur)
+    })
+  }
 }
