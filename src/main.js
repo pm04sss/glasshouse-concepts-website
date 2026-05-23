@@ -634,6 +634,42 @@ function renderShowcaseTile(mod) {
   </div>`
 }
 
+// Systems Inquiry form — no backend yet, so we (1) validate the fields
+// inline using the browser's constraint API, (2) push a clinical-style
+// status readout to the #inquiry-status node, and (3) open a prefilled
+// mailto: to the same admin address the Hero CTA already uses. This keeps
+// the contact flow functional without a server round-trip.
+const inquiryForm = document.getElementById('inquiry-form')
+const inquiryStatus = document.getElementById('inquiry-status')
+let inquiryStatusTimer = 0
+const setInquiryStatus = (text, tone = 'slate') => {
+  if (!inquiryStatus) return
+  inquiryStatus.textContent = text
+  inquiryStatus.classList.remove('text-slate-500', 'text-sky-400', 'text-emerald-400', 'text-rose-400')
+  inquiryStatus.classList.add({ slate: 'text-slate-500', sky: 'text-sky-400', emerald: 'text-emerald-400', rose: 'text-rose-400' }[tone])
+}
+const onInquirySubmit = (e) => {
+  e.preventDefault()
+  if (!inquiryForm.checkValidity()) {
+    setInquiryStatus('STATUS: Invalid input — check required fields.', 'rose')
+    inquiryForm.reportValidity()
+    return
+  }
+  const name = document.getElementById('inquiry-name').value.trim()
+  const email = document.getElementById('inquiry-email').value.trim()
+  const scope = document.getElementById('inquiry-scope').value.trim()
+  setInquiryStatus('STATUS: Transmitting…', 'sky')
+  clearTimeout(inquiryStatusTimer)
+  // Simulate a brief handshake before handing off to the mail client.
+  inquiryStatusTimer = window.setTimeout(() => {
+    const subject = encodeURIComponent(`Systems Inquiry — ${name}`)
+    const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nProject Scope:\n${scope}\n`)
+    window.location.href = `mailto:admin@glasshouseconcepts.io?subject=${subject}&body=${body}`
+    setInquiryStatus('STATUS: Channel handoff — opening secure mail client.', 'emerald')
+  }, 380)
+}
+if (inquiryForm) inquiryForm.addEventListener('submit', onInquirySubmit)
+
 // Dynamic shrinking header — toggle .is-scrolled past 50px scroll.
 // Uses a passive scroll listener and an internal flag so we only touch
 // classList when the scrolled state actually flips, not on every frame.
@@ -813,6 +849,8 @@ if (showcase && showcaseTrack) {
       showcase.removeEventListener('focus', onFocus)
       showcase.removeEventListener('blur', onBlur)
       showcase.removeEventListener('scroll', onScroll)
+      if (inquiryForm) inquiryForm.removeEventListener('submit', onInquirySubmit)
+      clearTimeout(inquiryStatusTimer)
     })
   }
 }
