@@ -611,11 +611,11 @@ body.loaded {
    transition-all class for a smooth shrink. The logo also scales down to
    match the tighter bar height. */
 #site-nav.is-scrolled {
-  padding-top: 3px;
-  padding-bottom: 3px;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
 }
 #site-nav.is-scrolled img {
-  height: 1.5rem;
+  height: 1.75rem;
 }
 
 /* App showcase — interactive horizontal scroller.
