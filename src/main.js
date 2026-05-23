@@ -164,9 +164,11 @@ function tickTelemetry() {
   if (latencyHistory.length > HISTORY_MAX) {
     latencyHistory.shift()
   }
-  const formatted = `${latency}ms`
-  if (latencyEl) latencyEl.textContent = formatted
-  if (latencyLargeEl) latencyLargeEl.textContent = formatted
+  // Compact form (e.g. "12ms") is for the inline header readout; the large
+  // hero metric splits number + unit into separate spans so the "ms" can be
+  // greyed independently — write just the number here.
+  if (latencyEl) latencyEl.textContent = `${latency}ms`
+  if (latencyLargeEl) latencyLargeEl.textContent = `${latency}`
 
   // Throughput: random walk around 1.20 GB/s, bounded 1.05–1.40.
   throughputGBs = clamp(throughputGBs + (Math.random() - 0.5) * 0.08, 1.05, 1.40)
