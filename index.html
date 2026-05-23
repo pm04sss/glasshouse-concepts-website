@@ -347,12 +347,17 @@
 
                     <div class="flex items-center justify-between flex-wrap gap-4 pt-2">
                         <span id="inquiry-status" class="font-mono text-[10px] tracking-widest uppercase text-slate-500" aria-live="polite">STATUS: Ready</span>
-                        <button type="submit"
-                                class="submit-data group inline-flex items-center gap-3 px-6 py-3 border border-emerald-500/40 bg-emerald-500/5 text-emerald-300 font-mono text-xs tracking-[0.3em] uppercase rounded-lg transition-all duration-300 hover:bg-emerald-500/15 hover:border-emerald-400 hover:text-emerald-200 hover:shadow-[0_0_24px_rgba(16,185,129,0.45)] focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400/60">
+                        <button id="inquiry-submit" type="submit"
+                                class="submit-data group inline-flex items-center gap-3 px-6 py-3 border border-emerald-500/40 bg-emerald-500/5 text-emerald-300 font-mono text-xs tracking-[0.3em] uppercase rounded-lg transition-all duration-300 hover:bg-emerald-500/15 hover:border-emerald-400 hover:text-emerald-200 hover:shadow-[0_0_24px_rgba(16,185,129,0.45)] focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400/60 disabled:opacity-60 disabled:cursor-not-allowed">
                             <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 group-hover:animate-pulse"></span>
-                            SUBMIT_DATA
+                            <span id="inquiry-submit-label">SUBMIT_DATA</span>
                             <span aria-hidden="true" class="transition-transform group-hover:translate-x-1">→</span>
                         </button>
+                    </div>
+                    <!-- Success receipt — neon emerald label revealed on 2xx response -->
+                    <div id="inquiry-success" class="hidden items-center gap-2 mt-2 font-mono text-[11px] tracking-[0.25em] uppercase text-emerald-400 drop-shadow-[0_0_10px_rgba(16,185,129,0.7)]" role="status">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                        INQUIRY_RECEIVED: SUCCESS
                     </div>
                 </form>
             </div>

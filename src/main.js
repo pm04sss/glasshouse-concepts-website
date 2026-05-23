@@ -634,39 +634,63 @@ function renderShowcaseTile(mod) {
   </div>`
 }
 
-// Systems Inquiry form — no backend yet, so we (1) validate the fields
-// inline using the browser's constraint API, (2) push a clinical-style
-// status readout to the #inquiry-status node, and (3) open a prefilled
-// mailto: to the same admin address the Hero CTA already uses. This keeps
-// the contact flow functional without a server round-trip.
+// Systems Inquiry form — modern fetch-based submission to Formspree.
+// Replace FORMSPREE_ENDPOINT with the real form ID from formspree.io once
+// the account is set up. Formspree accepts a POST of FormData and, when the
+// Accept header asks for JSON, returns a JSON envelope instead of redirecting
+// — so we get a clean SPA-style success/error without leaving the page.
+const FORMSPREE_ENDPOINT = 'https://formspree.io/f/placeholder'
 const inquiryForm = document.getElementById('inquiry-form')
 const inquiryStatus = document.getElementById('inquiry-status')
-let inquiryStatusTimer = 0
+const inquirySubmit = document.getElementById('inquiry-submit')
+const inquirySubmitLabel = document.getElementById('inquiry-submit-label')
+const inquirySuccess = document.getElementById('inquiry-success')
 const setInquiryStatus = (text, tone = 'slate') => {
   if (!inquiryStatus) return
   inquiryStatus.textContent = text
   inquiryStatus.classList.remove('text-slate-500', 'text-sky-400', 'text-emerald-400', 'text-rose-400')
   inquiryStatus.classList.add({ slate: 'text-slate-500', sky: 'text-sky-400', emerald: 'text-emerald-400', rose: 'text-rose-400' }[tone])
 }
-const onInquirySubmit = (e) => {
-  e.preventDefault()
+const onInquirySubmit = async (e) => {
+  e.preventDefault() // Zero-reload: never let the browser navigate.
   if (!inquiryForm.checkValidity()) {
     setInquiryStatus('STATUS: Invalid input — check required fields.', 'rose')
     inquiryForm.reportValidity()
     return
   }
-  const name = document.getElementById('inquiry-name').value.trim()
-  const email = document.getElementById('inquiry-email').value.trim()
-  const scope = document.getElementById('inquiry-scope').value.trim()
+  // Hide any prior success receipt before kicking off a new transmission.
+  if (inquirySuccess) {
+    inquirySuccess.classList.add('hidden')
+    inquirySuccess.classList.remove('flex')
+  }
+  // Lock the button and swap its label to UPLOADING… while the fetch is in
+  // flight. The disabled state also blocks double-submits.
+  inquirySubmit.disabled = true
+  if (inquirySubmitLabel) inquirySubmitLabel.textContent = 'UPLOADING...'
   setInquiryStatus('STATUS: Transmitting…', 'sky')
-  clearTimeout(inquiryStatusTimer)
-  // Simulate a brief handshake before handing off to the mail client.
-  inquiryStatusTimer = window.setTimeout(() => {
-    const subject = encodeURIComponent(`Systems Inquiry — ${name}`)
-    const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nProject Scope:\n${scope}\n`)
-    window.location.href = `mailto:admin@glasshouseconcepts.io?subject=${subject}&body=${body}`
-    setInquiryStatus('STATUS: Channel handoff — opening secure mail client.', 'emerald')
-  }, 380)
+
+  try {
+    const formData = new FormData(inquiryForm)
+    const response = await fetch(FORMSPREE_ENDPOINT, {
+      method: 'POST',
+      body: formData,
+      headers: { Accept: 'application/json' },
+    })
+    if (!response.ok) throw new Error(`HTTP ${response.status}`)
+    // Success path — reveal the neon receipt, clear the form, return the
+    // button to its resting state ready for another submission.
+    if (inquirySuccess) {
+      inquirySuccess.classList.remove('hidden')
+      inquirySuccess.classList.add('flex')
+    }
+    setInquiryStatus('STATUS: Channel acknowledged.', 'emerald')
+    inquiryForm.reset()
+  } catch (err) {
+    setInquiryStatus(`STATUS: Transmission failed — ${err.message}.`, 'rose')
+  } finally {
+    inquirySubmit.disabled = false
+    if (inquirySubmitLabel) inquirySubmitLabel.textContent = 'SUBMIT_DATA'
+  }
 }
 if (inquiryForm) inquiryForm.addEventListener('submit', onInquirySubmit)
 
@@ -850,7 +874,6 @@ if (showcase && showcaseTrack) {
       showcase.removeEventListener('blur', onBlur)
       showcase.removeEventListener('scroll', onScroll)
       if (inquiryForm) inquiryForm.removeEventListener('submit', onInquirySubmit)
-      clearTimeout(inquiryStatusTimer)
     })
   }
 }
