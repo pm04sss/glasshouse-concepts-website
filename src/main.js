@@ -656,12 +656,23 @@ const showcase = document.querySelector('.app-showcase')
 const showcaseTrack = document.querySelector('.app-showcase-track')
 if (showcase && showcaseTrack) {
   showcaseTrack.innerHTML = SHOWCASE_MODULES.map(renderShowcaseTile).join('')
-  // Duplicate the rendered set so the autonomous scroll can wrap seamlessly.
+  // Triple-buffer: render 3 identical copies of the tile set. The user always
+  // lives in the middle copy; when scrollLeft crosses into copy A (left) or
+  // copy C (right) we silently teleport them back into copy B. This makes the
+  // gallery infinite in BOTH directions — no dead-end on a hard left flick.
   const originals = Array.from(showcaseTrack.children)
+  const secondSetFirstTile = originals[0].cloneNode(true)
+  secondSetFirstTile.setAttribute('aria-hidden', 'true')
+  showcaseTrack.appendChild(secondSetFirstTile)
+  for (let i = 1; i < originals.length; i++) {
+    const c = originals[i].cloneNode(true)
+    c.setAttribute('aria-hidden', 'true')
+    showcaseTrack.appendChild(c)
+  }
   originals.forEach((node) => {
-    const clone = node.cloneNode(true)
-    clone.setAttribute('aria-hidden', 'true')
-    showcaseTrack.appendChild(clone)
+    const c = node.cloneNode(true)
+    c.setAttribute('aria-hidden', 'true')
+    showcaseTrack.appendChild(c)
   })
 
   const AUTO_SPEED_PX_PER_SEC = 40
@@ -672,6 +683,16 @@ if (showcase && showcaseTrack) {
   let dragStartScroll = 0
   let lastTs = 0
   let rafId = 0
+  // Stride = distance from the first tile of copy B to the first tile of copy C.
+  // Measuring the live DOM avoids math errors from flex `gap` (which sits both
+  // inside each copy and between copies). scrollWidth/3 would be off by ~16px
+  // on a 60-tile track and the wrap would visibly jump.
+  const singleSetWidth = secondSetFirstTile.offsetLeft - originals[0].offsetLeft
+  // Center the viewport in copy B so the user has equal infinite headroom in
+  // either direction. Runs synchronously before paint (equivalent of React's
+  // useLayoutEffect — no visible "from-zero" flash).
+  showcase.scrollLeft = singleSetWidth
+  let isWrapping = false // re-entry guard for the scroll-triggered wrap
 
   // Snap fights per-frame scrollLeft writes, so we disable it during the
   // autonomous loop and re-engage it the moment the user takes over.
@@ -708,13 +729,14 @@ if (showcase && showcaseTrack) {
   // Keyboard navigation — arrow keys step one card; Home/End jump to ends.
   // Engaging snap before scrollBy lets the browser snap to the nearest card.
   const onKey = (e) => {
-    const halfWidth = showcaseTrack.scrollWidth / 2
     let handled = true
     engageSnap()
     if (e.key === 'ArrowRight') showcase.scrollBy({ left: KEY_STEP_PX, behavior: 'smooth' })
     else if (e.key === 'ArrowLeft') showcase.scrollBy({ left: -KEY_STEP_PX, behavior: 'smooth' })
-    else if (e.key === 'Home') showcase.scrollTo({ left: 0, behavior: 'smooth' })
-    else if (e.key === 'End') showcase.scrollTo({ left: halfWidth - KEY_STEP_PX, behavior: 'smooth' })
+    // Home/End jump within the current (center) copy so the user can quickly
+    // reach the first / last module without leaving the middle buffer.
+    else if (e.key === 'Home') showcase.scrollTo({ left: singleSetWidth, behavior: 'smooth' })
+    else if (e.key === 'End') showcase.scrollTo({ left: singleSetWidth * 2 - KEY_STEP_PX, behavior: 'smooth' })
     else handled = false
     if (handled) {
       e.preventDefault()
@@ -724,6 +746,28 @@ if (showcase && showcaseTrack) {
   }
   const onBlur = () => { isHovering = false; disengageSnap() }
   const onFocus = () => { isHovering = true; engageSnap() }
+  // Bi-directional infinite wrap. scrollLeft writes inside this handler must
+  // not re-trigger the wrap path, hence the isWrapping guard. We also force
+  // snap OFF for the assignment frame so scroll-snap doesn't fight the
+  // teleport, and restore it afterwards if the user was interacting.
+  const onScroll = () => {
+    if (isWrapping) return
+    if (showcase.scrollLeft <= 0) {
+      isWrapping = true
+      const prevSnap = showcase.style.scrollSnapType
+      showcase.style.scrollSnapType = 'none'
+      showcase.scrollLeft = showcase.scrollLeft + singleSetWidth
+      showcase.style.scrollSnapType = prevSnap
+      isWrapping = false
+    } else if (showcase.scrollLeft >= singleSetWidth * 2) {
+      isWrapping = true
+      const prevSnap = showcase.style.scrollSnapType
+      showcase.style.scrollSnapType = 'none'
+      showcase.scrollLeft = showcase.scrollLeft - singleSetWidth
+      showcase.style.scrollSnapType = prevSnap
+      isWrapping = false
+    }
+  }
 
   showcase.addEventListener('mouseenter', onEnter)
   showcase.addEventListener('mouseleave', onLeave)
@@ -734,17 +778,17 @@ if (showcase && showcaseTrack) {
   showcase.addEventListener('keydown', onKey)
   showcase.addEventListener('focus', onFocus)
   showcase.addEventListener('blur', onBlur)
+  showcase.addEventListener('scroll', onScroll, { passive: true })
 
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  // Auto-scroll loop. Wrap logic lives in onScroll, so we just advance
+  // scrollLeft and let the boundary handler teleport when we cross.
   const step = (ts) => {
     if (!lastTs) lastTs = ts
     const dt = ts - lastTs
     lastTs = ts
     if (!isHovering && !isDragging && !prefersReducedMotion) {
-      const halfWidth = showcaseTrack.scrollWidth / 2
-      let next = showcase.scrollLeft + (AUTO_SPEED_PX_PER_SEC * dt) / 1000
-      if (next >= halfWidth) next -= halfWidth
-      showcase.scrollLeft = next
+      showcase.scrollLeft += (AUTO_SPEED_PX_PER_SEC * dt) / 1000
     }
     rafId = requestAnimationFrame(step)
   }
@@ -765,6 +809,7 @@ if (showcase && showcaseTrack) {
       showcase.removeEventListener('keydown', onKey)
       showcase.removeEventListener('focus', onFocus)
       showcase.removeEventListener('blur', onBlur)
+      showcase.removeEventListener('scroll', onScroll)
     })
   }
 }
