@@ -240,7 +240,7 @@ const moduleCellRefs = new Map()
 if (moduleGrid) {
   moduleGrid.innerHTML = MODULES.map(
     (mod) =>
-      `<div class="module-cell" data-module-id="${mod.id}"><span class="module-label">${mod.label}</span><span class="module-status flex items-center gap-1.5"></span></div>`
+      `<div class="module-cell w-full text-center justify-center" data-module-id="${mod.id}"><span class="module-label">${mod.label}</span><span class="module-status flex items-center gap-1.5"></span></div>`
   ).join('')
   moduleGrid.querySelectorAll('[data-module-id]').forEach((el) => {
     moduleCellRefs.set(el.dataset.moduleId, {
