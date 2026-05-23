@@ -638,7 +638,7 @@ function renderShowcaseTile(mod) {
 // the account is set up. Formspree accepts a POST of FormData and, when the
 // Accept header asks for JSON, returns a JSON envelope instead of redirecting
 // — so we get a clean SPA-style success/error without leaving the page.
-const FORMSPREE_ENDPOINT = 'https://formspree.io/f/placeholder'
+const FORMSPREE_ENDPOINT = 'https://formspree.io/f/YOUR_FORMSPREE_ID_HERE'
 const inquiryForm = document.getElementById('inquiry-form')
 const inquiryStatus = document.getElementById('inquiry-status')
 const inquirySubmit = document.getElementById('inquiry-submit')
@@ -669,11 +669,23 @@ const onInquirySubmit = async (e) => {
   setInquiryStatus('STATUS: Transmitting…', 'sky')
 
   try {
-    const formData = new FormData(inquiryForm)
+    // Pull values from the form and map them into Formspree's expected shape:
+    // name / email / message. The textarea is internally called "scope" for
+    // UX clarity, but Formspree (and most inbox previews) expect `message`.
+    const userName = document.getElementById('inquiry-name').value.trim()
+    const userEmail = document.getElementById('inquiry-email').value.trim()
+    const userMessage = document.getElementById('inquiry-scope').value.trim()
     const response = await fetch(FORMSPREE_ENDPOINT, {
       method: 'POST',
-      body: formData,
-      headers: { Accept: 'application/json' },
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name: userName,
+        email: userEmail,
+        message: userMessage,
+      }),
     })
     if (!response.ok) throw new Error(`HTTP ${response.status}`)
     // Success path — reveal the neon receipt, clear the form, return the
