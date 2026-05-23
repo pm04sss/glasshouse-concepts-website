@@ -369,30 +369,30 @@ if (logTextEl) {
 // marquee loop (-50% translate lands on the start of the second copy).
 const SHOWCASE_MODULES = [
   // Clinical
-  { name: 'VitalsOS',       category: 'Clinical',    accent: '#38bdf8', stat: 'v3.2',    metric: 'NOMINAL',     visual: 'pulse',      subtitle: 'Real-time user engagement monitoring.' },
-  { name: 'BioSync',        category: 'Clinical',    accent: '#10b981', stat: 'v2.1',    metric: 'SYNC',        visual: 'dualWave',   subtitle: 'Continuous audience health-state synchronization.' },
-  { name: 'NeuralMap',      category: 'Clinical',    accent: '#8b5cf6', stat: 'v1.7',    metric: 'MAPPING',     visual: 'neural',     subtitle: 'Behavioral pattern mapping across your user base.' },
-  { name: 'MedCheck',       category: 'Clinical',    accent: '#14b8a6', stat: 'v4.0',    metric: 'VERIFIED',    visual: 'checklist',  subtitle: 'Compliance verification for regulated content workflows.' },
+  { name: 'VitalsOS',       category: 'Clinical',    accent: '#38bdf8', stat: 'v3.2',    metric: 'NOMINAL',     visual: 'pulse',      subtitle: 'RT telemetry · 1ms tick',          benefit: 'See exactly what your audience does, live.' },
+  { name: 'BioSync',        category: 'Clinical',    accent: '#10b981', stat: 'v2.1',    metric: 'SYNC',        visual: 'dualWave',   subtitle: 'Bidirectional state mesh',         benefit: 'Every screen shows the same truth, instantly.' },
+  { name: 'NeuralMap',      category: 'Clinical',    accent: '#8b5cf6', stat: 'v1.7',    metric: 'MAPPING',     visual: 'neural',     subtitle: 'Unsupervised clustering',          benefit: 'Discover behavior patterns you did not know existed.' },
+  { name: 'MedCheck',       category: 'Clinical',    accent: '#14b8a6', stat: 'v4.0',    metric: 'VERIFIED',    visual: 'checklist',  subtitle: 'HIPAA + SOC2 audit chain',         benefit: 'Stay compliant without slowing down.' },
   // Security
-  { name: 'AegisVault',     category: 'Security',    accent: '#6366f1', stat: 'AES-256', metric: 'SECURED',     visual: 'lockShield', subtitle: 'Military-grade protection for your premium IP.' },
-  { name: 'SentinelRBAC',   category: 'Security',    accent: '#94a3b8', stat: 'v2.8',    metric: 'ENFORCING',   visual: 'shieldCheck',subtitle: 'Granular role-based access for every team member.' },
-  { name: 'QuantumKey',     category: 'Security',    accent: '#fbbf24', stat: 'PQC',     metric: 'ROTATED',     visual: 'key',        subtitle: 'Post-quantum key rotation for long-lived licenses.' },
-  { name: 'ZeroShield',     category: 'Security',    accent: '#22d3ee', stat: 'v3.0',    metric: 'ACTIVE',      visual: 'shield',     subtitle: 'Zero-trust gateway in front of every API call.' },
+  { name: 'AegisVault',     category: 'Security',    accent: '#6366f1', stat: 'AES-256', metric: 'SECURED',     visual: 'lockShield', subtitle: 'AES-256 + HSM-backed keys',        benefit: 'Your premium IP cannot be stolen.' },
+  { name: 'SentinelRBAC',   category: 'Security',    accent: '#94a3b8', stat: 'v2.8',    metric: 'ENFORCING',   visual: 'shieldCheck',subtitle: 'ABAC policy graph',                benefit: 'Give every teammate exactly what they need.' },
+  { name: 'QuantumKey',     category: 'Security',    accent: '#fbbf24', stat: 'PQC',     metric: 'ROTATED',     visual: 'key',        subtitle: 'CRYSTALS-Kyber rotation',          benefit: 'Future-proof against quantum attacks.' },
+  { name: 'ZeroShield',     category: 'Security',    accent: '#22d3ee', stat: 'v3.0',    metric: 'ACTIVE',      visual: 'shield',     subtitle: 'mTLS + JWT introspection',         benefit: 'Every request verified before it touches your code.' },
   // Performance
-  { name: 'ApexThroughput', category: 'Performance', accent: '#ef4444', stat: '1.2GB/s', metric: 'PEAK',        visual: 'bars',       subtitle: 'Burst-capacity engine for viral traffic spikes.' },
-  { name: 'FluxPipeline',   category: 'Performance', accent: '#f97316', stat: 'v5.4',    metric: 'FLOWING',     visual: 'pipeline',   subtitle: 'Always-on content pipeline from upload to viewer.' },
-  { name: 'ChronosLogs',    category: 'Performance', accent: '#f59e0b', stat: '4.1k/s',  metric: 'STREAMING',   visual: 'terminal',   subtitle: 'Millisecond-precision event log for every interaction.' },
-  { name: 'EdgeNode',       category: 'Performance', accent: '#0ea5e9', stat: '23 PoP',  metric: 'ROUTING',     visual: 'edgeMap',    subtitle: 'Sub-50ms latency for global content distribution.' },
+  { name: 'ApexThroughput', category: 'Performance', accent: '#ef4444', stat: '1.2GB/s', metric: 'PEAK',        visual: 'bars',       subtitle: 'Adaptive backpressure',            benefit: 'Survive your biggest launch day.' },
+  { name: 'FluxPipeline',   category: 'Performance', accent: '#f97316', stat: 'v5.4',    metric: 'FLOWING',     visual: 'pipeline',   subtitle: 'Event-driven CDC',                 benefit: 'Content reaches viewers the moment you publish.' },
+  { name: 'ChronosLogs',    category: 'Performance', accent: '#f59e0b', stat: '4.1k/s',  metric: 'STREAMING',   visual: 'terminal',   subtitle: 'Append-only WAL',                  benefit: 'Replay any moment in your product history.' },
+  { name: 'EdgeNode',       category: 'Performance', accent: '#0ea5e9', stat: '23 PoP',  metric: 'ROUTING',     visual: 'edgeMap',    subtitle: '23-PoP anycast mesh',              benefit: 'Your global audience feels like a local app.' },
   // Creator
-  { name: 'LuminaIP',       category: 'Creator',     accent: '#ec4899', stat: 'v1.9',    metric: 'CREATIVE',    visual: 'gallery',    subtitle: 'Automated membership and content delivery logic.' },
-  { name: 'PrismStream',    category: 'Creator',     accent: '#fb7185', stat: '60fps',   metric: 'BROADCAST',   visual: 'spectrum',   subtitle: 'Broadcast-grade streaming straight from your dashboard.' },
-  { name: 'ZenithUI',       category: 'Creator',     accent: '#f1f5f9', stat: 'v6.0',    metric: 'RENDERED',    visual: 'uiMock',     subtitle: 'Production-ready interface kit for any creator surface.' },
-  { name: 'EchoWave',       category: 'Creator',     accent: '#facc15', stat: '48kHz',   metric: 'TRANSMITTING',visual: 'waveform',   subtitle: 'Studio-quality audio capture, mastering, and playback.' },
+  { name: 'LuminaIP',       category: 'Creator',     accent: '#ec4899', stat: 'v1.9',    metric: 'CREATIVE',    visual: 'gallery',    subtitle: 'Webhook-driven entitlements',      benefit: 'Subscribers unlock content the second they pay.' },
+  { name: 'PrismStream',    category: 'Creator',     accent: '#fb7185', stat: '60fps',   metric: 'BROADCAST',   visual: 'spectrum',   subtitle: 'WebRTC + HLS fanout',              benefit: 'Stream live in studio quality, no extra gear.' },
+  { name: 'ZenithUI',       category: 'Creator',     accent: '#f1f5f9', stat: 'v6.0',    metric: 'RENDERED',    visual: 'uiMock',     subtitle: 'Tokenized design system',          benefit: 'Ship a beautiful UI in days, not months.' },
+  { name: 'EchoWave',       category: 'Creator',     accent: '#facc15', stat: '48kHz',   metric: 'TRANSMITTING',visual: 'waveform',   subtitle: '48kHz lossless DSP',               benefit: 'Sound like a professional studio recorded you.' },
   // Logic
-  { name: 'Pathfinder',     category: 'Logic',       accent: '#6ee7b7', stat: 'MAP_v1',  metric: 'COMPUTING',   visual: 'tree',       subtitle: 'Adaptive curriculum and learning-path orchestration.' },
-  { name: 'CerebroAI',      category: 'Logic',       accent: '#cbd5e1', stat: 'v0.9',    metric: 'INFERRING',   visual: 'mesh',       subtitle: 'On-demand AI inference tuned to your creator workflow.' },
-  { name: 'TitanDB',        category: 'Logic',       accent: '#a855f7', stat: '12TB',    metric: 'INDEXED',     visual: 'database',   subtitle: 'Petabyte-scale archive for every asset you have ever made.' },
-  { name: 'NexusHub',       category: 'Logic',       accent: '#84cc16', stat: 'v3.1',    metric: 'CONNECTED',   visual: 'hub',        subtitle: 'Single integration layer for every tool you already use.' },
+  { name: 'Pathfinder',     category: 'Logic',       accent: '#6ee7b7', stat: 'MAP_v1',  metric: 'COMPUTING',   visual: 'tree',       subtitle: 'DAG-based curriculum',             benefit: 'Each learner gets the perfect next step.' },
+  { name: 'CerebroAI',      category: 'Logic',       accent: '#cbd5e1', stat: 'v0.9',    metric: 'INFERRING',   visual: 'mesh',       subtitle: 'Quantized on-device inference',    benefit: 'Add AI features without the AI bill.' },
+  { name: 'TitanDB',        category: 'Logic',       accent: '#a855f7', stat: '12TB',    metric: 'INDEXED',     visual: 'database',   subtitle: 'Distributed cold + hot tiers',     benefit: 'Never lose anything you have ever created.' },
+  { name: 'NexusHub',       category: 'Logic',       accent: '#84cc16', stat: 'v3.1',    metric: 'CONNECTED',   visual: 'hub',        subtitle: 'OAuth + webhook fabric',           benefit: 'Plug into every tool your business already runs.' },
 ]
 
 const SHOWCASE_VISUALS = {
@@ -611,9 +611,10 @@ function renderShowcaseTile(mod) {
   return `<div class="app-tile snap-center shrink-0 w-64 h-96 bg-slate-900/80 rounded-xl border shadow-2xl relative transition-transform duration-300 ease-out hover:scale-105 hover:z-10 overflow-hidden" style="border-color:${mod.accent}33;">
     <div class="w-full h-full bg-slate-950/40 p-4 flex flex-col gap-3">
       <div class="flex items-start justify-between gap-2">
-        <div class="flex flex-col gap-1 min-w-0">
+        <div class="flex flex-col min-w-0">
           <span class="font-mono text-[10px] tracking-widest uppercase truncate" style="color:${mod.accent}; text-shadow:0 0 6px ${mod.accent}66;">${mod.name}</span>
-          <span class="text-[10px] text-slate-400 leading-snug font-light">${mod.subtitle}</span>
+          <span class="text-[8px] uppercase tracking-tighter opacity-40 font-mono text-slate-300 leading-tight">${mod.subtitle}</span>
+          <span class="text-[11px] font-bold text-sky-400 mt-1 leading-snug">${mod.benefit}</span>
         </div>
         <span class="flex items-center gap-1 text-[8px] font-mono text-slate-400 uppercase tracking-wider shrink-0 pt-0.5">
           <span class="w-1.5 h-1.5 rounded-full animate-pulse" style="background:${mod.accent}; box-shadow:0 0 4px ${mod.accent};"></span>${mod.category}
