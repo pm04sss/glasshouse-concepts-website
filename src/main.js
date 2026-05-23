@@ -638,7 +638,7 @@ function renderShowcaseTile(mod) {
 // the account is set up. Formspree accepts a POST of FormData and, when the
 // Accept header asks for JSON, returns a JSON envelope instead of redirecting
 // — so we get a clean SPA-style success/error without leaving the page.
-const FORMSPREE_ENDPOINT = 'https://formspree.io/f/YOUR_FORMSPREE_ID_HERE'
+const FORMSPREE_ENDPOINT = 'https://formspree.io/f/meedzooy'
 const inquiryForm = document.getElementById('inquiry-form')
 const inquiryStatus = document.getElementById('inquiry-status')
 const inquirySubmit = document.getElementById('inquiry-submit')
