@@ -369,30 +369,30 @@ if (logTextEl) {
 // marquee loop (-50% translate lands on the start of the second copy).
 const SHOWCASE_MODULES = [
   // Clinical
-  { name: 'VitalsOS',       category: 'Clinical',    accent: '#38bdf8', stat: 'v3.2',    metric: 'NOMINAL',     visual: 'pulse',      subtitle: 'RT telemetry · 1ms tick',          benefit: 'See exactly what your audience does, live.' },
-  { name: 'BioSync',        category: 'Clinical',    accent: '#10b981', stat: 'v2.1',    metric: 'SYNC',        visual: 'dualWave',   subtitle: 'Bidirectional state mesh',         benefit: 'Every screen shows the same truth, instantly.' },
-  { name: 'NeuralMap',      category: 'Clinical',    accent: '#8b5cf6', stat: 'v1.7',    metric: 'MAPPING',     visual: 'neural',     subtitle: 'Unsupervised clustering',          benefit: 'Discover behavior patterns you did not know existed.' },
-  { name: 'MedCheck',       category: 'Clinical',    accent: '#14b8a6', stat: 'v4.0',    metric: 'VERIFIED',    visual: 'checklist',  subtitle: 'HIPAA + SOC2 audit chain',         benefit: 'Stay compliant without slowing down.' },
+  { name: 'VitalsOS',       category: 'Clinical',    accent: '#38bdf8', stat: 'v3.2',    metric: 'NOMINAL',     visual: 'pulse',      techDetail: 'RT telemetry · 1ms tick',          laymanBenefit: 'See your audience, live.' },
+  { name: 'BioSync',        category: 'Clinical',    accent: '#10b981', stat: 'v2.1',    metric: 'SYNC',        visual: 'dualWave',   techDetail: 'Bidirectional state mesh',         laymanBenefit: 'One source of truth, instantly.' },
+  { name: 'NeuralMap',      category: 'Clinical',    accent: '#8b5cf6', stat: 'v1.7',    metric: 'MAPPING',     visual: 'neural',     techDetail: 'Unsupervised clustering',          laymanBenefit: 'See patterns you would miss.' },
+  { name: 'MedCheck',       category: 'Clinical',    accent: '#14b8a6', stat: 'v4.0',    metric: 'VERIFIED',    visual: 'checklist',  techDetail: 'HIPAA + SOC2 audit chain',         laymanBenefit: 'Compliant. No bottleneck.' },
   // Security
-  { name: 'AegisVault',     category: 'Security',    accent: '#6366f1', stat: 'AES-256', metric: 'SECURED',     visual: 'lockShield', subtitle: 'AES-256 + HSM-backed keys',        benefit: 'Your premium IP cannot be stolen.' },
-  { name: 'SentinelRBAC',   category: 'Security',    accent: '#94a3b8', stat: 'v2.8',    metric: 'ENFORCING',   visual: 'shieldCheck',subtitle: 'ABAC policy graph',                benefit: 'Give every teammate exactly what they need.' },
-  { name: 'QuantumKey',     category: 'Security',    accent: '#fbbf24', stat: 'PQC',     metric: 'ROTATED',     visual: 'key',        subtitle: 'CRYSTALS-Kyber rotation',          benefit: 'Future-proof against quantum attacks.' },
-  { name: 'ZeroShield',     category: 'Security',    accent: '#22d3ee', stat: 'v3.0',    metric: 'ACTIVE',      visual: 'shield',     subtitle: 'mTLS + JWT introspection',         benefit: 'Every request verified before it touches your code.' },
+  { name: 'AegisVault',     category: 'Security',    accent: '#6366f1', stat: 'AES-256', metric: 'SECURED',     visual: 'lockShield', techDetail: 'AES-256 + HSM-backed keys',        laymanBenefit: 'Hacker-proof IP.' },
+  { name: 'SentinelRBAC',   category: 'Security',    accent: '#94a3b8', stat: 'v2.8',    metric: 'ENFORCING',   visual: 'shieldCheck',techDetail: 'ABAC policy graph',                laymanBenefit: 'Right access, every teammate.' },
+  { name: 'QuantumKey',     category: 'Security',    accent: '#fbbf24', stat: 'PQC',     metric: 'ROTATED',     visual: 'key',        techDetail: 'CRYSTALS-Kyber rotation',          laymanBenefit: 'Future-proof encryption.' },
+  { name: 'ZeroShield',     category: 'Security',    accent: '#22d3ee', stat: 'v3.0',    metric: 'ACTIVE',      visual: 'shield',     techDetail: 'mTLS + JWT introspection',         laymanBenefit: 'Verified at the door.' },
   // Performance
-  { name: 'ApexThroughput', category: 'Performance', accent: '#ef4444', stat: '1.2GB/s', metric: 'PEAK',        visual: 'bars',       subtitle: 'Adaptive backpressure',            benefit: 'Survive your biggest launch day.' },
-  { name: 'FluxPipeline',   category: 'Performance', accent: '#f97316', stat: 'v5.4',    metric: 'FLOWING',     visual: 'pipeline',   subtitle: 'Event-driven CDC',                 benefit: 'Content reaches viewers the moment you publish.' },
-  { name: 'ChronosLogs',    category: 'Performance', accent: '#f59e0b', stat: '4.1k/s',  metric: 'STREAMING',   visual: 'terminal',   subtitle: 'Append-only WAL',                  benefit: 'Replay any moment in your product history.' },
-  { name: 'EdgeNode',       category: 'Performance', accent: '#0ea5e9', stat: '23 PoP',  metric: 'ROUTING',     visual: 'edgeMap',    subtitle: '23-PoP anycast mesh',              benefit: 'Your global audience feels like a local app.' },
+  { name: 'ApexThroughput', category: 'Performance', accent: '#ef4444', stat: '1.2GB/s', metric: 'PEAK',        visual: 'bars',       techDetail: 'Adaptive backpressure',            laymanBenefit: 'Survives launch day.' },
+  { name: 'FluxPipeline',   category: 'Performance', accent: '#f97316', stat: 'v5.4',    metric: 'FLOWING',     visual: 'pipeline',   techDetail: 'Event-driven CDC',                 laymanBenefit: 'Publish → live, instantly.' },
+  { name: 'ChronosLogs',    category: 'Performance', accent: '#f59e0b', stat: '4.1k/s',  metric: 'STREAMING',   visual: 'terminal',   techDetail: 'Append-only WAL',                  laymanBenefit: 'Replay any moment.' },
+  { name: 'EdgeNode',       category: 'Performance', accent: '#0ea5e9', stat: '23 PoP',  metric: 'ROUTING',     visual: 'edgeMap',    techDetail: '23-PoP anycast mesh',              laymanBenefit: 'Feels local, everywhere.' },
   // Creator
-  { name: 'LuminaIP',       category: 'Creator',     accent: '#ec4899', stat: 'v1.9',    metric: 'CREATIVE',    visual: 'gallery',    subtitle: 'Webhook-driven entitlements',      benefit: 'Subscribers unlock content the second they pay.' },
-  { name: 'PrismStream',    category: 'Creator',     accent: '#fb7185', stat: '60fps',   metric: 'BROADCAST',   visual: 'spectrum',   subtitle: 'WebRTC + HLS fanout',              benefit: 'Stream live in studio quality, no extra gear.' },
-  { name: 'ZenithUI',       category: 'Creator',     accent: '#f1f5f9', stat: 'v6.0',    metric: 'RENDERED',    visual: 'uiMock',     subtitle: 'Tokenized design system',          benefit: 'Ship a beautiful UI in days, not months.' },
-  { name: 'EchoWave',       category: 'Creator',     accent: '#facc15', stat: '48kHz',   metric: 'TRANSMITTING',visual: 'waveform',   subtitle: '48kHz lossless DSP',               benefit: 'Sound like a professional studio recorded you.' },
+  { name: 'LuminaIP',       category: 'Creator',     accent: '#ec4899', stat: 'v1.9',    metric: 'CREATIVE',    visual: 'gallery',    techDetail: 'Webhook-driven entitlements',      laymanBenefit: 'Pay → unlock, instantly.' },
+  { name: 'PrismStream',    category: 'Creator',     accent: '#fb7185', stat: '60fps',   metric: 'BROADCAST',   visual: 'spectrum',   techDetail: 'WebRTC + HLS fanout',              laymanBenefit: 'Studio-grade live, no rig.' },
+  { name: 'ZenithUI',       category: 'Creator',     accent: '#f1f5f9', stat: 'v6.0',    metric: 'RENDERED',    visual: 'uiMock',     techDetail: 'Tokenized design system',          laymanBenefit: 'Beautiful UI in days.' },
+  { name: 'EchoWave',       category: 'Creator',     accent: '#facc15', stat: '48kHz',   metric: 'TRANSMITTING',visual: 'waveform',   techDetail: '48kHz lossless DSP',               laymanBenefit: 'Professional-studio sound.' },
   // Logic
-  { name: 'Pathfinder',     category: 'Logic',       accent: '#6ee7b7', stat: 'MAP_v1',  metric: 'COMPUTING',   visual: 'tree',       subtitle: 'DAG-based curriculum',             benefit: 'Each learner gets the perfect next step.' },
-  { name: 'CerebroAI',      category: 'Logic',       accent: '#cbd5e1', stat: 'v0.9',    metric: 'INFERRING',   visual: 'mesh',       subtitle: 'Quantized on-device inference',    benefit: 'Add AI features without the AI bill.' },
-  { name: 'TitanDB',        category: 'Logic',       accent: '#a855f7', stat: '12TB',    metric: 'INDEXED',     visual: 'database',   subtitle: 'Distributed cold + hot tiers',     benefit: 'Never lose anything you have ever created.' },
-  { name: 'NexusHub',       category: 'Logic',       accent: '#84cc16', stat: 'v3.1',    metric: 'CONNECTED',   visual: 'hub',        subtitle: 'OAuth + webhook fabric',           benefit: 'Plug into every tool your business already runs.' },
+  { name: 'Pathfinder',     category: 'Logic',       accent: '#6ee7b7', stat: 'MAP_v1',  metric: 'COMPUTING',   visual: 'tree',       techDetail: 'DAG-based curriculum',             laymanBenefit: 'The perfect next step.' },
+  { name: 'CerebroAI',      category: 'Logic',       accent: '#cbd5e1', stat: 'v0.9',    metric: 'INFERRING',   visual: 'mesh',       techDetail: 'Quantized on-device inference',    laymanBenefit: 'AI features, no AI bill.' },
+  { name: 'TitanDB',        category: 'Logic',       accent: '#a855f7', stat: '12TB',    metric: 'INDEXED',     visual: 'database',   techDetail: 'Distributed cold + hot tiers',     laymanBenefit: 'Never lose a file.' },
+  { name: 'NexusHub',       category: 'Logic',       accent: '#84cc16', stat: 'v3.1',    metric: 'CONNECTED',   visual: 'hub',        techDetail: 'OAuth + webhook fabric',           laymanBenefit: 'Plugs into your stack.' },
 ]
 
 const SHOWCASE_VISUALS = {
@@ -610,19 +610,22 @@ function renderShowcaseTile(mod) {
   const visual = visualFn ? visualFn(mod.accent) : ''
   return `<div class="app-tile snap-center shrink-0 w-64 h-96 bg-slate-900/80 rounded-xl border shadow-2xl relative transition-transform duration-300 ease-out hover:scale-105 hover:z-10 overflow-hidden" style="border-color:${mod.accent}33;">
     <div class="w-full h-full bg-slate-950/40 p-4 flex flex-col gap-3">
+      <!-- TOP: Name (large bold) + Tech detail (mono 40%) + category pill -->
       <div class="flex items-start justify-between gap-2">
         <div class="flex flex-col min-w-0">
-          <span class="font-mono text-[10px] tracking-widest uppercase truncate" style="color:${mod.accent}; text-shadow:0 0 6px ${mod.accent}66;">${mod.name}</span>
-          <span class="text-[8px] uppercase tracking-tighter opacity-40 font-mono text-slate-300 leading-tight">${mod.subtitle}</span>
-          <span class="text-[11px] font-bold text-sky-400 mt-1 leading-snug">${mod.benefit}</span>
+          <span class="font-mono text-sm font-bold tracking-wider uppercase truncate" style="color:${mod.accent}; text-shadow:0 0 6px ${mod.accent}66;">${mod.name}</span>
+          <span class="text-[8px] uppercase tracking-tighter opacity-40 font-mono text-slate-300 leading-tight mt-0.5">${mod.techDetail}</span>
         </div>
-        <span class="flex items-center gap-1 text-[8px] font-mono text-slate-400 uppercase tracking-wider shrink-0 pt-0.5">
+        <span class="flex items-center gap-1 text-[8px] font-mono text-slate-400 uppercase tracking-wider shrink-0 pt-1">
           <span class="w-1.5 h-1.5 rounded-full animate-pulse" style="background:${mod.accent}; box-shadow:0 0 4px ${mod.accent};"></span>${mod.category}
         </span>
       </div>
+      <!-- MIDDLE: visual canvas, fills remaining space -->
       <div class="flex-1 rounded-md border bg-slate-950/60 p-3 flex items-center justify-center overflow-hidden" style="border-color:${mod.accent}22;">
         ${visual}
       </div>
+      <!-- BOTTOM: Layman benefit (sky-blue bold) above the diagnostic footer -->
+      <div class="text-[11px] font-bold text-sky-400 leading-snug">${mod.laymanBenefit}</div>
       <div class="flex items-center justify-between text-[8px] font-mono pt-1 border-t border-white/5">
         <span class="text-slate-500 tracking-wider">${mod.stat}</span>
         <span style="color:${mod.accent}cc;">${mod.metric}</span>
