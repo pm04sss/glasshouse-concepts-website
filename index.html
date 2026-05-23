@@ -303,63 +303,95 @@
         </div>
         </section>
 
-        <!-- Systems Inquiry / Contact Form -->
+        <!-- Systems Inquiry / Contact + System Identity — 65/35 split -->
         <section class="py-12 border-b border-white/5">
-        <div class="bg-slate-950/40 backdrop-blur-xl border border-white/10 rounded-3xl p-8 md:p-12 max-w-3xl mx-auto relative overflow-hidden">
-            <!-- Subtle scanline & corner brackets to match clinical chrome -->
-            <div class="scanline-overlay opacity-30"></div>
-            <div class="absolute top-3 left-3 w-3 h-3 border-l border-t border-sky-400/40"></div>
-            <div class="absolute top-3 right-3 w-3 h-3 border-r border-t border-sky-400/40"></div>
-            <div class="absolute bottom-3 left-3 w-3 h-3 border-l border-b border-sky-400/40"></div>
-            <div class="absolute bottom-3 right-3 w-3 h-3 border-r border-b border-sky-400/40"></div>
-
-            <div class="relative z-10">
-                <div class="flex items-start justify-between mb-8 flex-wrap gap-3">
-                    <div>
-                        <span class="text-sky-400 font-mono text-[10px] tracking-[0.3em] uppercase block mb-2">// Secure Channel</span>
-                        <h2 class="font-mono text-2xl md:text-3xl font-bold tracking-tight text-white">Initialize Inquiry</h2>
-                        <p class="text-slate-400 text-sm mt-2 max-w-lg leading-relaxed">Open a transmission. We respond to all qualified inquiries within one business day.</p>
+        <div class="flex flex-col md:flex-row gap-[5%]">
+            <!-- LEFT 65% — Inquiry Form -->
+            <div class="bg-slate-950/40 backdrop-blur-xl rounded-xl border border-white/10 p-8 relative overflow-hidden md:w-[65%]">
+                <div class="scanline-overlay opacity-30"></div>
+                <div class="relative z-10">
+                    <div class="flex items-start justify-between mb-8 flex-wrap gap-3">
+                        <div>
+                            <span class="text-sky-400 font-mono text-[10px] tracking-[0.3em] uppercase block mb-2">// Secure Channel</span>
+                            <h2 class="font-mono text-2xl md:text-3xl font-bold tracking-tight text-white whitespace-nowrap">Initialize Inquiry</h2>
+                            <p class="text-slate-400 text-sm mt-2 leading-relaxed">Open a transmission. Qualified inquiries answered within 24 hours.</p>
+                        </div>
+                        <span class="flex items-center gap-2 text-[10px] font-mono uppercase tracking-widest text-emerald-400 shrink-0">
+                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span> Awaiting Input
+                        </span>
                     </div>
-                    <span class="flex items-center gap-2 text-[10px] font-mono uppercase tracking-widest text-emerald-400 shrink-0">
-                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span> Awaiting Input
-                    </span>
+
+                    <form id="inquiry-form" class="flex flex-col gap-6" novalidate>
+                        <div class="flex flex-col gap-2">
+                            <label for="inquiry-name" class="font-mono text-[10px] tracking-[0.3em] uppercase text-slate-500">Name</label>
+                            <input id="inquiry-name" name="name" type="text" required autocomplete="name"
+                                   class="bg-transparent border-b border-white/20 focus:border-sky-400 focus:outline-none py-2 text-white font-mono text-sm placeholder:text-slate-600 transition-colors"
+                                   placeholder="Your full name" />
+                        </div>
+                        <div class="flex flex-col gap-2">
+                            <label for="inquiry-email" class="font-mono text-[10px] tracking-[0.3em] uppercase text-slate-500">Email</label>
+                            <input id="inquiry-email" name="email" type="email" required autocomplete="email"
+                                   class="bg-transparent border-b border-white/20 focus:border-sky-400 focus:outline-none py-2 text-white font-mono text-sm placeholder:text-slate-600 transition-colors"
+                                   placeholder="you@domain.com" />
+                        </div>
+                        <div class="flex flex-col gap-2">
+                            <label for="inquiry-scope" class="font-mono text-[10px] tracking-[0.3em] uppercase text-slate-500">Project Scope</label>
+                            <textarea id="inquiry-scope" name="scope" rows="4" required
+                                      class="bg-transparent border-b border-white/20 focus:border-sky-400 focus:outline-none py-2 text-white font-mono text-sm placeholder:text-slate-600 transition-colors resize-none"
+                                      placeholder="Briefly describe your system, scale, and timeline."></textarea>
+                        </div>
+
+                        <div class="flex items-center justify-between flex-wrap gap-4 pt-2">
+                            <span id="inquiry-status" class="font-mono text-[10px] tracking-widest uppercase text-slate-500" aria-live="polite">STATUS: Ready</span>
+                            <button id="inquiry-submit" type="submit"
+                                    class="submit-data group inline-flex items-center gap-3 px-6 py-3 border border-emerald-500/40 bg-emerald-500/5 text-emerald-300 font-mono text-xs tracking-[0.3em] uppercase rounded-lg transition-all duration-300 hover:bg-emerald-500/15 hover:border-emerald-400 hover:text-emerald-200 hover:shadow-[0_0_24px_rgba(16,185,129,0.45)] focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400/60 disabled:opacity-60 disabled:cursor-not-allowed">
+                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 group-hover:animate-pulse"></span>
+                                <span id="inquiry-submit-label">SUBMIT_DATA</span>
+                                <span aria-hidden="true" class="transition-transform group-hover:translate-x-1">→</span>
+                            </button>
+                        </div>
+                        <!-- Success receipt — neon emerald label revealed on 2xx response -->
+                        <div id="inquiry-success" class="hidden items-center gap-2 mt-2 font-mono text-[11px] tracking-[0.25em] uppercase text-emerald-400 drop-shadow-[0_0_10px_rgba(16,185,129,0.7)]" role="status">
+                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                            INQUIRY_RECEIVED: SUCCESS
+                        </div>
+                    </form>
                 </div>
+            </div>
 
-                <form id="inquiry-form" class="flex flex-col gap-6" novalidate>
-                    <div class="flex flex-col gap-2">
-                        <label for="inquiry-name" class="font-mono text-[10px] tracking-[0.3em] uppercase text-slate-500">Name</label>
-                        <input id="inquiry-name" name="name" type="text" required autocomplete="name"
-                               class="bg-transparent border-b border-white/20 focus:border-sky-400 focus:outline-none py-2 text-white font-mono text-sm placeholder:text-slate-600 transition-colors"
-                               placeholder="Your full name" />
+            <!-- RIGHT 35% — System Identity readout -->
+            <div class="bg-slate-950/40 backdrop-blur-xl rounded-xl border border-white/10 p-8 relative overflow-hidden md:w-[30%] mt-6 md:mt-0">
+                <div class="scanline-overlay opacity-30"></div>
+                <div class="relative z-10 flex flex-col gap-6 h-full">
+                    <div>
+                        <span class="text-emerald-400 font-mono text-[10px] tracking-[0.3em] uppercase block mb-2">// System Identity</span>
+                        <h2 class="font-mono text-2xl font-bold tracking-tight text-white whitespace-nowrap">Operations Console</h2>
                     </div>
-                    <div class="flex flex-col gap-2">
-                        <label for="inquiry-email" class="font-mono text-[10px] tracking-[0.3em] uppercase text-slate-500">Email</label>
-                        <input id="inquiry-email" name="email" type="email" required autocomplete="email"
-                               class="bg-transparent border-b border-white/20 focus:border-sky-400 focus:outline-none py-2 text-white font-mono text-sm placeholder:text-slate-600 transition-colors"
-                               placeholder="you@domain.com" />
+                    <dl class="flex flex-col gap-5 text-sm">
+                        <div class="flex flex-col gap-1">
+                            <dt class="font-mono text-[10px] tracking-[0.3em] uppercase text-slate-500">Location</dt>
+                            <dd class="text-white font-mono">QLD, Australia</dd>
+                        </div>
+                        <div class="flex flex-col gap-1">
+                            <dt class="font-mono text-[10px] tracking-[0.3em] uppercase text-slate-500">Primary Channel</dt>
+                            <dd class="text-white font-mono break-all"><a href="mailto:admin@glasshouseconcepts.io" class="hover:text-sky-400 transition-colors">admin@glasshouseconcepts.io</a></dd>
+                        </div>
+                        <div class="flex flex-col gap-1">
+                            <dt class="font-mono text-[10px] tracking-[0.3em] uppercase text-slate-500">Response Window</dt>
+                            <dd class="text-white font-mono">&lt; 24 hrs · Business days</dd>
+                        </div>
+                        <div class="flex flex-col gap-1">
+                            <dt class="font-mono text-[10px] tracking-[0.3em] uppercase text-slate-500">Operational Status</dt>
+                            <dd class="text-emerald-400 font-mono flex items-center gap-2">
+                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span> All systems nominal
+                            </dd>
+                        </div>
+                    </dl>
+                    <div class="mt-auto pt-6 border-t border-white/5 flex items-center justify-between font-mono text-[10px] uppercase tracking-widest">
+                        <span class="text-slate-500">BUILD</span>
+                        <span class="text-sky-400">GHC.v2026.05</span>
                     </div>
-                    <div class="flex flex-col gap-2">
-                        <label for="inquiry-scope" class="font-mono text-[10px] tracking-[0.3em] uppercase text-slate-500">Project Scope</label>
-                        <textarea id="inquiry-scope" name="scope" rows="4" required
-                                  class="bg-transparent border-b border-white/20 focus:border-sky-400 focus:outline-none py-2 text-white font-mono text-sm placeholder:text-slate-600 transition-colors resize-none"
-                                  placeholder="Briefly describe your system, scale, and timeline."></textarea>
-                    </div>
-
-                    <div class="flex items-center justify-between flex-wrap gap-4 pt-2">
-                        <span id="inquiry-status" class="font-mono text-[10px] tracking-widest uppercase text-slate-500" aria-live="polite">STATUS: Ready</span>
-                        <button id="inquiry-submit" type="submit"
-                                class="submit-data group inline-flex items-center gap-3 px-6 py-3 border border-emerald-500/40 bg-emerald-500/5 text-emerald-300 font-mono text-xs tracking-[0.3em] uppercase rounded-lg transition-all duration-300 hover:bg-emerald-500/15 hover:border-emerald-400 hover:text-emerald-200 hover:shadow-[0_0_24px_rgba(16,185,129,0.45)] focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400/60 disabled:opacity-60 disabled:cursor-not-allowed">
-                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 group-hover:animate-pulse"></span>
-                            <span id="inquiry-submit-label">SUBMIT_DATA</span>
-                            <span aria-hidden="true" class="transition-transform group-hover:translate-x-1">→</span>
-                        </button>
-                    </div>
-                    <!-- Success receipt — neon emerald label revealed on 2xx response -->
-                    <div id="inquiry-success" class="hidden items-center gap-2 mt-2 font-mono text-[11px] tracking-[0.25em] uppercase text-emerald-400 drop-shadow-[0_0_10px_rgba(16,185,129,0.7)]" role="status">
-                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                        INQUIRY_RECEIVED: SUCCESS
-                    </div>
-                </form>
+                </div>
             </div>
         </div>
         </section>
